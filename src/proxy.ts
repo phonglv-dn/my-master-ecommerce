@@ -11,6 +11,7 @@ export default createMiddleware({
 export const config = {
   // Áp dụng middleware cho tất cả route TRỪ: _next, api, và static files
   matcher: [
-    "/((?!_next|api|.*\\.(?:ico|png|jpg|jpeg|svg|gif|webp|woff2?|ttf|otf|css|js)).*)",
+    // Exclude _next, api, static files AND /admin from next-intl middleware
+    "/((?!_next|api|admin|.*\\.(?:ico|png|jpg|jpeg|svg|gif|webp|woff2?|ttf|otf|css|js)).*)",
   ],
 };
