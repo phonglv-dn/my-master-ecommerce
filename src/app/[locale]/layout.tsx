@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { SHOP_CONFIG, type Locale } from "../../../shop.config";
+import { CurrencyProvider } from "../../contexts/CurrencyContext";
 import "../globals.css";
 
 const inter = Inter({
@@ -31,25 +32,22 @@ export default async function LocaleLayout({
 }: LocaleLayoutProps) {
   const { locale } = await params;
 
-  // Kiểm tra locale hợp lệ
   const isValidLocale = SHOP_CONFIG.i18n.locales.includes(locale as Locale);
   if (!isValidLocale) notFound();
 
-  // Lấy messages cho locale hiện tại
   const messages = await getMessages();
 
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
+          <CurrencyProvider>{children}</CurrencyProvider>
         </NextIntlClientProvider>
       </body>
     </html>
   );
 }
 
-// Tạo static params cho tất cả locales
 export function generateStaticParams() {
   return SHOP_CONFIG.i18n.locales.map((locale) => ({ locale }));
 }
