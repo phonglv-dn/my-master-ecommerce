@@ -1,0 +1,39 @@
+{
+  "common": {
+    "home": "Trang chủ",
+    "products": "Sản phẩm",
+    "cart": "Giỏ hàng",
+    "account": "Tài khoản",
+    "search": "Tìm kiếm...",
+    "addToCart": "Thêm vào giỏ",
+    "buyNow": "Mua ngay",
+    "loading": "Đang tải...",
+    "error": "Đã xảy ra lỗi",
+    "viewAll": "Xem tất cả"
+  },
+  "home": {
+    "heroTitle": "Mua sắm thông minh,\nGiao hàng nhanh chóng",
+    "heroSubtitle": "Khám phá hàng nghìn sản phẩm chất lượng với giá tốt nhất",
+    "featuredProducts": "Sản phẩm nổi bật",
+    "newArrivals": "Hàng mới về"
+  },
+  "product": {
+    "price": "Giá",
+    "inStock": "Còn hàng",
+    "outOfStock": "Hết hàng",
+    "quantity": "Số lượng",
+    "description": "Mô tả sản phẩm",
+    "reviews": "Đánh giá"
+  },
+  "cart": {
+    "empty": "Giỏ hàng trống",
+    "total": "Tổng cộng",
+    "checkout": "Thanh toán",
+    "continueShopping": "Tiếp tục mua sắm",
+    "remove": "Xóa"
+  },
+  "currency": {
+    "VND": "₫",
+    "USD": "$"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "common": {
+    "home": "Home",
+    "products": "Products",
+    "cart": "Cart",
+    "account": "Account",
+    "search": "Search...",
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "viewAll": "View All"
+  },
+  "home": {
+    "heroTitle": "Shop Smart,\nDeliver Fast",
+    "heroSubtitle": "Discover thousands of quality products at the best prices",
+    "featuredProducts": "Featured Products",
+    "newArrivals": "New Arrivals"
+  },
+  "product": {
+    "price": "Price",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "quantity": "Quantity",
+    "description": "Product Description",
+    "reviews": "Reviews"
+  },
+  "cart": {
+    "empty": "Your cart is empty",
+    "total": "Total",
+    "checkout": "Checkout",
+    "continueShopping": "Continue Shopping",
+    "remove": "Remove"
+  },
+  "currency": {
+    "VND": "₫",
+    "USD": "$"
+  }
+}

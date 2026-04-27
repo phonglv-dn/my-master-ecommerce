@@ -1,7 +1,14 @@
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin(
+  // Đường dẫn tới i18n request config (tạo ở bước sau)
+  "./src/i18n/request.ts"
+);
+
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  /* Thêm các config khác tại đây nếu cần */
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
