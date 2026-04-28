@@ -3,8 +3,9 @@
 import { useLocale } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { Plus, Check } from "lucide-react";
 import { useCurrency } from "../../../contexts/CurrencyContext";
+import { useCart } from "../../../contexts/CartContext";
 import { formatPrice } from "../../../../lib/formatPrice";
 import type { Product } from "../../../../types";
 import type { Locale } from "../../../../shop.config";
@@ -25,7 +26,10 @@ export default function ProductCard({
 }: ProductCardProps) {
   const locale = useLocale() as Locale;
   const { currency } = useCurrency();
+  const { items, addToCart, removeFromCart } = useCart();
   const [imgError, setImgError] = useState(false);
+
+  const isInCart = items.some((item) => item.product?.id === product.id);
 
   const localizedTitle = product.title[locale] ?? product.title.vi;
   const localizedCategory = product.category?.name[locale] ?? product.category?.name.vi ?? "Category";
@@ -61,12 +65,31 @@ export default function ProductCard({
         </Link>
 
         {/* Hover Button */}
-        <button 
-          className="absolute bottom-4 left-1/2 flex h-8 w-8 -translate-x-1/2 translate-y-4 items-center justify-center bg-white text-black opacity-0 shadow-sm transition-all duration-300 hover:bg-black hover:text-white group-hover:translate-y-0 group-hover:opacity-100"
-          aria-label="Add to cart"
-        >
-          <Plus size={16} strokeWidth={2} />
-        </button>
+        {isInCart ? (
+          <button 
+            className="absolute bottom-4 left-1/2 flex h-8 w-8 -translate-x-1/2 items-center justify-center bg-black text-white shadow-sm transition-all duration-300 hover:bg-gray-800 translate-y-0 opacity-100"
+            aria-label="Remove from cart"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              removeFromCart(product.id);
+            }}
+          >
+            <Check size={16} strokeWidth={2} />
+          </button>
+        ) : (
+          <button 
+            className="absolute bottom-4 left-1/2 flex h-8 w-8 -translate-x-1/2 translate-y-4 items-center justify-center bg-white text-black opacity-0 shadow-sm transition-all duration-300 hover:bg-black hover:text-white group-hover:translate-y-0 group-hover:opacity-100"
+            aria-label="Add to cart"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              addToCart(product, 1);
+            }}
+          >
+            <Plus size={16} strokeWidth={2} />
+          </button>
+        )}
       </div>
 
       {/* Info Container */}
