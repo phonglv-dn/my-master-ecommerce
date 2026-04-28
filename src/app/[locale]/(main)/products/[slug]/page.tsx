@@ -1,9 +1,6 @@
 import { notFound } from "next/navigation";
-import { getProductBySlug } from "../../../../../lib/supabase";
+import { getProductBySlug } from "../../../../../../lib/supabase";
 import ProductDetailClient from "./ProductDetailClient";
-import HeaderV1 from "../../../../components/modular/HeaderV1/HeaderV1";
-import HeaderV2 from "../../../../components/modular/HeaderV2/HeaderV2";
-import { SHOP_CONFIG } from "../../../../../shop.config";
 import type { Metadata } from "next";
 
 interface Props {
@@ -36,11 +33,8 @@ export default async function ProductDetailPage({ params }: Props) {
     notFound();
   }
 
-  const activeHeader = SHOP_CONFIG.layout.headerVariant;
-
   return (
     <main className="min-h-screen bg-white dark:bg-gray-950">
-      {activeHeader === "v1" ? <HeaderV1 /> : <HeaderV2 />}
       <ProductDetailClient product={product} />
     </main>
   );

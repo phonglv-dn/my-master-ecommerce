@@ -1,17 +1,13 @@
 import { getTranslations } from "next-intl/server"
 import { ShoppingBag, Zap, Shield, Truck } from "lucide-react"
-import { SHOP_CONFIG } from "../../../shop.config"
-import HeaderV1 from "../../components/modular/HeaderV1/HeaderV1"
-import HeaderV2 from "../../components/modular/HeaderV2/HeaderV2"
-import { HeaderV3 } from "../../components/modular/HeaderV3"
-import { HeroV3 } from "../../components/modular/HeroV3"
-import ProductCardV1 from "../../components/modular/ProductCardV1/ProductCardV1"
-import ProductCardV2 from "../../components/modular/ProductCardV2/ProductCardV2"
-import NewThisWeek from "../../components/modular/NewThisWeek/NewThisWeek"
-import Collections from "../../components/modular/Collections/Collections"
-import { LookbookApproach } from "../../components/modular/LookbookApproach"
-import { Footer } from "../../components/modular/Footer"
-import { getProducts, getCategories } from "../../../lib/supabase"
+import { SHOP_CONFIG } from "../../../../shop.config"
+import { HeroV3 } from "../../../components/modular/HeroV3"
+import ProductCardV1 from "../../../components/modular/ProductCardV1/ProductCardV1"
+import ProductCardV2 from "../../../components/modular/ProductCardV2/ProductCardV2"
+import NewThisWeek from "../../../components/modular/NewThisWeek/NewThisWeek"
+import Collections from "../../../components/modular/Collections/Collections"
+import { LookbookApproach } from "../../../components/modular/LookbookApproach"
+import { getProducts } from "../../../../lib/supabase"
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 export default async function HomePage() {
@@ -19,19 +15,12 @@ export default async function HomePage() {
   const tc = await getTranslations("common")
 
   const products = await getProducts({ limit: 12 })
-  const categories = await getCategories()
 
-  const activeHeader = SHOP_CONFIG.layout.headerVariant
   const activeHero = SHOP_CONFIG.layout.heroVariant
   const activeCard = SHOP_CONFIG.layout.cardVariant
 
   return (
     <main className='min-h-screen bg-white dark:bg-gray-950'>
-      {/* ── Header variants demo ─────────────────────────────────────────── */}
-      {activeHeader === "v1" && <HeaderV1 />}
-      {activeHeader === "v2" && <HeaderV2 />}
-      {activeHeader === "v3" && <HeaderV3 categories={categories} />}
-
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       {activeHero === "v3" ? (
         <HeroV3 />
@@ -72,9 +61,6 @@ export default async function HomePage() {
 
       {/* ── Lookbook Approach ──────────────────────────────────────────────── */}
       <LookbookApproach />
-
-      {/* ── Footer ─────────────────────────────────────────────────────────── */}
-      <Footer />
     </main>
   )
 }

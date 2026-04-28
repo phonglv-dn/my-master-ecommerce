@@ -4,10 +4,10 @@ import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
 import { Trash2, Plus, Minus, ShoppingBag, ShoppingCart, ArrowRight } from "lucide-react";
-import { useCart } from "../../../contexts/CartContext";
-import { useCurrency } from "../../../contexts/CurrencyContext";
-import { formatPrice } from "../../../../lib/formatPrice";
-import type { Locale } from "../../../../shop.config";
+import { useCart } from "../../../../contexts/CartContext";
+import { useCurrency } from "../../../../contexts/CurrencyContext";
+import { formatPrice } from "../../../../../lib/formatPrice";
+import type { Locale } from "../../../../../shop.config";
 
 export default function CartClient() {
   const t = useTranslations("cart");

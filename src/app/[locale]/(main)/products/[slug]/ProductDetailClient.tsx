@@ -4,11 +4,11 @@ import { useState } from "react";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { ShoppingCart, Package, Plus, Minus } from "lucide-react";
-import { useCurrency } from "../../../../contexts/CurrencyContext";
-import { formatPrice } from "../../../../../lib/formatPrice";
-import type { Product } from "../../../../../types";
-import type { Locale } from "../../../../../shop.config";
-import { useCart } from "../../../../contexts/CartContext";
+import { useCurrency } from "../../../../../contexts/CurrencyContext";
+import { formatPrice } from "../../../../../../lib/formatPrice";
+import type { Product } from "../../../../../../types";
+import type { Locale } from "../../../../../../shop.config";
+import { useCart } from "../../../../../contexts/CartContext";
 
 interface ProductDetailClientProps {
   product: Product;
