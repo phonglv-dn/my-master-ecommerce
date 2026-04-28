@@ -111,7 +111,14 @@ export default async function AdminProductsPage() {
                       </span>
                     </td>
                     <td>
-                      <div className="admin-table__actions">
+                      <div className="admin-table__actions" style={{ display: "flex", gap: "0.5rem" }}>
+                        <Link
+                          href={`/admin/products/${p.id}/edit`}
+                          className="admin-btn admin-btn--ghost"
+                          style={{ padding: "0.375rem 0.75rem", fontSize: "0.875rem" }}
+                        >
+                          Sửa
+                        </Link>
                         <DeleteBtn id={p.id} />
                       </div>
                     </td>
