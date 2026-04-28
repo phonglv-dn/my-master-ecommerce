@@ -9,7 +9,13 @@
     "buyNow": "Mua ngay",
     "loading": "Đang tải...",
     "error": "Đã xảy ra lỗi",
-    "viewAll": "Xem tất cả"
+    "viewAll": "Xem tất cả",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "edit": "Chỉnh sửa",
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất"
   },
   "home": {
     "heroTitle": "Mua sắm thông minh,\nGiao hàng nhanh chóng",
@@ -35,5 +41,24 @@
   "currency": {
     "VND": "₫",
     "USD": "$"
+  },
+  "admin": {
+    "dashboard": "Bảng điều khiển",
+    "manageProducts": "Quản lý Sản phẩm",
+    "manageCategories": "Quản lý Danh mục",
+    "manageOrders": "Quản lý Đơn hàng",
+    "settings": "Cài đặt",
+    "addProduct": "Thêm Sản phẩm Mới",
+    "editProduct": "Chỉnh sửa Sản phẩm",
+    "productName": "Tên sản phẩm",
+    "productDescription": "Mô tả",
+    "productPrice": "Giá (VND)",
+    "productStock": "Số lượng tồn kho",
+    "productImages": "Hình ảnh",
+    "productSlug": "Đường dẫn (Slug)",
+    "productCategory": "Danh mục",
+    "submit": "Xác nhận",
+    "success": "Thành công",
+    "fail": "Thất bại"
   }
 }

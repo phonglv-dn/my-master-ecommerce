@@ -9,7 +9,13 @@
     "buyNow": "Buy Now",
     "loading": "Loading...",
     "error": "Something went wrong",
-    "viewAll": "View All"
+    "viewAll": "View All",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "login": "Login",
+    "logout": "Logout"
   },
   "home": {
     "heroTitle": "Shop Smart,\nDeliver Fast",
@@ -35,5 +41,24 @@
   "currency": {
     "VND": "₫",
     "USD": "$"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "manageProducts": "Manage Products",
+    "manageCategories": "Manage Categories",
+    "manageOrders": "Manage Orders",
+    "settings": "Settings",
+    "addProduct": "Add New Product",
+    "editProduct": "Edit Product",
+    "productName": "Product Name",
+    "productDescription": "Description",
+    "productPrice": "Price (VND)",
+    "productStock": "Stock Quantity",
+    "productImages": "Images",
+    "productSlug": "URL Slug",
+    "productCategory": "Category",
+    "submit": "Submit",
+    "success": "Success",
+    "fail": "Failed"
   }
 }
