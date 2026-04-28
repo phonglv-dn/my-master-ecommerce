@@ -11,6 +11,8 @@ import ProductCardV1 from "../../components/modular/ProductCardV1/ProductCardV1"
 import ProductCardV2 from "../../components/modular/ProductCardV2/ProductCardV2";
 import NewThisWeek from "../../components/modular/NewThisWeek/NewThisWeek";
 import Collections from "../../components/modular/Collections/Collections";
+import { LookbookApproach } from "../../components/modular/LookbookApproach";
+import { Footer } from "../../components/modular/Footer";
 import { getProducts } from "../../../lib/supabase";
 
 // ── Page ──────────────────────────────────────────────────────────────────────
@@ -84,6 +86,12 @@ export default async function HomePage() {
 
       {/* ── Collections ────────────────────────────────────────────────────── */}
       <Collections products={products} />
+
+      {/* ── Lookbook Approach ──────────────────────────────────────────────── */}
+      <LookbookApproach />
+
+      {/* ── Footer ─────────────────────────────────────────────────────────── */}
+      <Footer />
     </main>
   );
 }
