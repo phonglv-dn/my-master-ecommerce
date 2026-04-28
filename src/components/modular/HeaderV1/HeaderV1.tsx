@@ -9,6 +9,8 @@ import CurrencySwitcher from "../CurrencySwitcher/CurrencySwitcher";
 import { SHOP_CONFIG } from "../../../../shop.config";
 import type { Locale } from "../../../../shop.config";
 
+import { useCart } from "../../../contexts/CartContext";
+
 // ── HeaderV1 ─────────────────────────────────────────────────────────────────
 // Classic opaque sticky header with full navigation bar.
 // Contains: logo | nav links | locale switcher | currency switcher | cart icon.
@@ -17,6 +19,7 @@ export default function HeaderV1() {
   const t = useTranslations("common");
   const locale = useLocale() as Locale;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { totalItems } = useCart();
 
   const navLinks = [
     { href: `/${locale}`, label: t("home") },
@@ -54,11 +57,16 @@ export default function HeaderV1() {
 
           <Link
             href={`/${locale}/cart`}
-            className="header-v1__cart-btn"
+            className="header-v1__cart-btn relative"
             aria-label={t("cart")}
             id="header-v1-cart"
           >
             <ShoppingCart size={20} />
+            {totalItems > 0 && (
+              <span className="absolute -top-1.5 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-sm ring-2 ring-white dark:ring-gray-900">
+                {totalItems}
+              </span>
+            )}
           </Link>
 
           {/* Mobile hamburger */}

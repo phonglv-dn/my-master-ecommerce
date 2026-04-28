@@ -5,6 +5,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { SHOP_CONFIG, type Locale } from "../../../shop.config";
 import { CurrencyProvider } from "../../contexts/CurrencyContext";
+import { CartProvider } from "../../contexts/CartContext";
 import "../globals.css";
 
 const inter = Inter({
@@ -41,7 +42,9 @@ export default async function LocaleLayout({
     <html lang={locale} suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <CurrencyProvider>{children}</CurrencyProvider>
+          <CurrencyProvider>
+            <CartProvider>{children}</CartProvider>
+          </CurrencyProvider>
         </NextIntlClientProvider>
       </body>
     </html>

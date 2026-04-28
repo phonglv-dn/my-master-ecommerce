@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState, useEffect } from "react";
+import { useActionState, useState } from "react";
 import Link from "next/link";
 import { createProduct, type CreateProductState } from "../actions";
 import { SHOP_CONFIG } from "../../../../../shop.config";
@@ -43,16 +43,17 @@ export default function AddProductForm() {
     setDisplayPrice(digits ? formatVnd(digits) : "");
   };
 
-  // Auto-slug from Vi title
   const [titleVi, setTitleVi] = useState("");
   const [slug, setSlug] = useState("");
 
-  useEffect(() => {
-    if (!titleVi) {
+  const handleTitleViChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setTitleVi(val);
+    if (!val) {
       setSlug("");
       return;
     }
-    const auto = titleVi
+    const auto = val
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
@@ -62,7 +63,7 @@ export default function AddProductForm() {
       .replace(/\s+/g, "-")
       .replace(/-+/g, "-");
     setSlug(auto);
-  }, [titleVi]);
+  };
 
   const usdPreview = priceToUsd(rawPrice);
 
@@ -122,7 +123,7 @@ export default function AddProductForm() {
               type="text"
               placeholder="Ví dụ: Áo thun basic màu trắng"
               value={titleVi}
-              onChange={(e) => setTitleVi(e.target.value)}
+              onChange={handleTitleViChange}
               required
             />
           </div>

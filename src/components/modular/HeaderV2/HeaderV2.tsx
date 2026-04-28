@@ -9,6 +9,8 @@ import CurrencySwitcher from "../CurrencySwitcher/CurrencySwitcher";
 import { SHOP_CONFIG } from "../../../../shop.config";
 import type { Locale } from "../../../../shop.config";
 
+import { useCart } from "../../../contexts/CartContext";
+
 // ── HeaderV2 ─────────────────────────────────────────────────────────────────
 // Sticky transparent header that gains a frosted-glass background on scroll.
 // Minimal: logo + icon controls only; locale & currency switchers in a drawer.
@@ -18,6 +20,7 @@ export default function HeaderV2() {
   const locale = useLocale() as Locale;
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { totalItems } = useCart();
 
   // Detect scroll to toggle blur background
   useEffect(() => {
@@ -69,11 +72,16 @@ export default function HeaderV2() {
 
             <Link
               href={`/${locale}/cart`}
-              className="header-v2__icon-btn"
+              className="header-v2__icon-btn relative"
               aria-label={t("cart")}
               id="header-v2-cart"
             >
               <ShoppingCart size={20} />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white shadow-sm ring-2 ring-white dark:ring-gray-900">
+                  {totalItems}
+                </span>
+              )}
             </Link>
 
             <button

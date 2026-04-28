@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useCurrency } from "../../../contexts/CurrencyContext";
+import { useCart } from "../../../contexts/CartContext";
 import { formatPrice } from "../../../../lib/formatPrice";
 import type { Product } from "../../../../types";
 import type { Locale } from "../../../../shop.config";
@@ -27,6 +28,7 @@ export default function ProductCardV2({
   const tc = useTranslations("common");
   const locale = useLocale() as Locale;
   const { currency } = useCurrency();
+  const { addToCart } = useCart();
 
   // Localized title: product.title is LocalizedString { vi, en }
   const localizedTitle = product.title[locale] ?? product.title.vi;
@@ -112,7 +114,10 @@ export default function ProductCardV2({
               id={`add-to-cart-v2-${product.id}`}
               className="product-card-v2__cta"
               disabled={isOutOfStock}
-              onClick={() => onAddToCart?.(product)}
+              onClick={() => {
+                addToCart(product, 1);
+                onAddToCart?.(product);
+              }}
               aria-label={`${tc("addToCart")} – ${localizedTitle}`}
             >
               <ShoppingCart size={15} aria-hidden="true" />

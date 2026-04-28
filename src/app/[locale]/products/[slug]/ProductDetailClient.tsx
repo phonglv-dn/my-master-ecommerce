@@ -8,6 +8,7 @@ import { useCurrency } from "../../../../contexts/CurrencyContext";
 import { formatPrice } from "../../../../../lib/formatPrice";
 import type { Product } from "../../../../../types";
 import type { Locale } from "../../../../../shop.config";
+import { useCart } from "../../../../contexts/CartContext";
 
 interface ProductDetailClientProps {
   product: Product;
@@ -18,6 +19,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
   const tc = useTranslations("common");
   const locale = useLocale() as Locale;
   const { currency } = useCurrency();
+  const { addToCart } = useCart();
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -37,8 +39,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
   };
 
   const handleAddToCart = () => {
-    // Tạm thời log ra console, sẽ tích hợp Context Giỏ hàng sau.
-    console.log("Add to cart:", product.id, "Quantity:", quantity);
+    addToCart(product, quantity);
     alert(`Đã thêm ${quantity} x ${localizedTitle} vào giỏ hàng!`);
   };
 
