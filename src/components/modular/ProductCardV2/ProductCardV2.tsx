@@ -45,7 +45,7 @@ export default function ProductCardV2({
   return (
     <article className="product-card-v2" aria-label={localizedTitle}>
       {/* ── Left: Image ── */}
-      <div className="product-card-v2__image-wrap">
+      <Link href={`/${locale}/products/${product.slug}`} className="product-card-v2__image-wrap" style={{ display: 'block' }}>
         {coverImage && !imgError ? (
           <Image
             src={coverImage}
@@ -69,7 +69,7 @@ export default function ProductCardV2({
             {t("outOfStock")}
           </span>
         )}
-      </div>
+      </Link>
 
       {/* ── Right: Info ── */}
       <div className="product-card-v2__body">
@@ -80,7 +80,11 @@ export default function ProductCardV2({
             </span>
           )}
 
-          <h3 className="product-card-v2__title">{localizedTitle}</h3>
+          <h3 className="product-card-v2__title">
+            <Link href={`/${locale}/products/${product.slug}`} className="hover:underline">
+              {localizedTitle}
+            </Link>
+          </h3>
 
           {localizedDesc && (
             <p className="product-card-v2__desc">{localizedDesc}</p>

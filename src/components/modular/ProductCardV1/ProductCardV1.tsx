@@ -3,6 +3,7 @@
 import { useTranslations, useLocale } from "next-intl";
 import { ShoppingCart, Star, Package } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { useCurrency } from "../../../contexts/CurrencyContext";
 import { formatPrice } from "../../../../lib/formatPrice";
@@ -40,7 +41,7 @@ export default function ProductCardV1({
   return (
     <article className="product-card-v1" aria-label={localizedTitle}>
       {/* ── Image ── */}
-      <div className="product-card-v1__image-wrap">
+      <Link href={`/${locale}/products/${product.slug}`} className="product-card-v1__image-wrap" style={{ display: 'block' }}>
         {coverImage && !imgError ? (
           <Image
             src={coverImage}
@@ -62,11 +63,15 @@ export default function ProductCardV1({
             {t("outOfStock")}
           </span>
         )}
-      </div>
+      </Link>
 
       {/* ── Info ── */}
       <div className="product-card-v1__body">
-        <h3 className="product-card-v1__title">{localizedTitle}</h3>
+        <h3 className="product-card-v1__title">
+          <Link href={`/${locale}/products/${product.slug}`} className="hover:underline">
+            {localizedTitle}
+          </Link>
+        </h3>
 
         {/* Star rating placeholder */}
         <div className="product-card-v1__stars" aria-hidden="true">
