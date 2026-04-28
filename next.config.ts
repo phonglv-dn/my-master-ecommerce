@@ -8,7 +8,18 @@ const withNextIntl = createNextIntlPlugin(
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* Thêm các config khác tại đây nếu cần */
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+      },
+    ],
+  },
 };
 
 export default withNextIntl(nextConfig);

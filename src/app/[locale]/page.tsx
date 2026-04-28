@@ -1,70 +1,20 @@
-"use client";
 
-import { useTranslations } from "next-intl";
+
+import { getTranslations } from "next-intl/server";
 import { ShoppingBag, Zap, Shield, Truck } from "lucide-react";
 import { SHOP_CONFIG } from "../../../shop.config";
 import HeaderV1 from "../../components/modular/HeaderV1/HeaderV1";
 import HeaderV2 from "../../components/modular/HeaderV2/HeaderV2";
 import ProductCardV1 from "../../components/modular/ProductCardV1/ProductCardV1";
 import ProductCardV2 from "../../components/modular/ProductCardV2/ProductCardV2";
-import type { Product } from "../../../types";
-
-// ── Mock data ─────────────────────────────────────────────────────────────────
-const MOCK_PRODUCTS: Product[] = [
-  {
-    id: "1",
-    title: { vi: "Áo Thun Premium Unisex", en: "Premium Unisex T-Shirt" },
-    description: {
-      vi: "Chất liệu cotton cao cấp, thoáng mát, bền màu.",
-      en: "Premium cotton material, breathable and colorfast.",
-    },
-    price_vnd: 290_000,
-    slug: "ao-thun-premium",
-    images: [],
-    stock: 12,
-    category_id: null,
-    created_at: "",
-    updated_at: "",
-    category: { id: "c1", slug: "apparel", name: { vi: "Thời trang", en: "Apparel" }, created_at: "" },
-  },
-  {
-    id: "2",
-    title: { vi: "Giày Sneaker Classic", en: "Classic Sneaker" },
-    description: {
-      vi: "Đế cao su chống trơn trượt, phù hợp mọi địa hình.",
-      en: "Non-slip rubber sole, suitable for all terrains.",
-    },
-    price_vnd: 1_290_000,
-    slug: "giay-sneaker-classic",
-    images: [],
-    stock: 0,
-    category_id: null,
-    created_at: "",
-    updated_at: "",
-    category: { id: "c2", slug: "shoes", name: { vi: "Giày dép", en: "Shoes" }, created_at: "" },
-  },
-  {
-    id: "3",
-    title: { vi: "Balo Du Lịch Thông Minh", en: "Smart Travel Backpack" },
-    description: {
-      vi: "Ngăn sạc USB tích hợp, chống nước cấp độ cao.",
-      en: "Built-in USB charging port, high-level water resistance.",
-    },
-    price_vnd: 850_000,
-    slug: "balo-du-lich-thong-minh",
-    images: [],
-    stock: 5,
-    category_id: null,
-    created_at: "",
-    updated_at: "",
-    category: { id: "c3", slug: "bags", name: { vi: "Túi xách", en: "Bags" }, created_at: "" },
-  },
-];
+import { getProducts } from "../../../lib/supabase";
 
 // ── Page ──────────────────────────────────────────────────────────────────────
-export default function HomePage() {
-  const t = useTranslations("home");
-  const tc = useTranslations("common");
+export default async function HomePage() {
+  const t = await getTranslations("home");
+  const tc = await getTranslations("common");
+
+  const products = await getProducts({ limit: 12 });
 
   const activeHeader = SHOP_CONFIG.layout.headerVariant;
   const activeCard = SHOP_CONFIG.layout.cardVariant;
@@ -137,22 +87,20 @@ export default function HomePage() {
         {activeCard === "v1" ? (
           /* V1: vertical grid */
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: "1.25rem" }}>
-            {MOCK_PRODUCTS.map((p) => (
+            {products.map((p) => (
               <ProductCardV1
                 key={p.id}
                 product={p}
-                onAddToCart={(prod) => console.log("Add to cart:", prod.id)}
               />
             ))}
           </div>
         ) : (
           /* V2: horizontal list */
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            {MOCK_PRODUCTS.map((p) => (
+            {products.map((p) => (
               <ProductCardV2
                 key={p.id}
                 product={p}
-                onAddToCart={(prod) => console.log("Add to cart:", prod.id)}
               />
             ))}
           </div>
@@ -180,11 +128,11 @@ export default function HomePage() {
         <div className="grid gap-8 md:grid-cols-2">
           <div>
             <p className="mb-3 text-sm font-semibold text-gray-500 uppercase tracking-wider">CardV1 — Vertical</p>
-            <ProductCardV1 product={MOCK_PRODUCTS[0]} />
+            {products[0] && <ProductCardV1 product={products[0]} />}
           </div>
           <div>
             <p className="mb-3 text-sm font-semibold text-gray-500 uppercase tracking-wider">CardV2 — Horizontal</p>
-            <ProductCardV2 product={MOCK_PRODUCTS[1]} />
+            {products[1] && <ProductCardV2 product={products[1]} />}
           </div>
         </div>
       </section>
