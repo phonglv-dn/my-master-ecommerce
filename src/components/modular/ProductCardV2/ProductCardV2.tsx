@@ -4,6 +4,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { ShoppingCart, Package, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { useCurrency } from "../../../contexts/CurrencyContext";
 import { formatPrice } from "../../../../lib/formatPrice";
 import type { Product } from "../../../../types";
@@ -39,18 +40,20 @@ export default function ProductCardV2({
 
   const isOutOfStock = product.stock === 0;
   const coverImage = product.images?.[0] ?? null;
+  const [imgError, setImgError] = useState(false);
 
   return (
     <article className="product-card-v2" aria-label={localizedTitle}>
       {/* ── Left: Image ── */}
       <div className="product-card-v2__image-wrap">
-        {coverImage ? (
+        {coverImage && !imgError ? (
           <Image
             src={coverImage}
             alt={localizedTitle}
             fill
             sizes="(max-width: 640px) 120px, 180px"
             className="product-card-v2__image"
+            onError={() => setImgError(true)}
           />
         ) : (
           <div

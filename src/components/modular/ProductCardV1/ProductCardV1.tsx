@@ -3,6 +3,7 @@
 import { useTranslations, useLocale } from "next-intl";
 import { ShoppingCart, Star, Package } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 import { useCurrency } from "../../../contexts/CurrencyContext";
 import { formatPrice } from "../../../../lib/formatPrice";
 import type { Product } from "../../../../types";
@@ -34,18 +35,20 @@ export default function ProductCardV1({
 
   const isOutOfStock = product.stock === 0;
   const coverImage = product.images?.[0] ?? null;
+  const [imgError, setImgError] = useState(false);
 
   return (
     <article className="product-card-v1" aria-label={localizedTitle}>
       {/* ── Image ── */}
       <div className="product-card-v1__image-wrap">
-        {coverImage ? (
+        {coverImage && !imgError ? (
           <Image
             src={coverImage}
             alt={localizedTitle}
             fill
             sizes="(max-width: 640px) 100vw, 280px"
             className="product-card-v1__image"
+            onError={() => setImgError(true)}
           />
         ) : (
           <div className="product-card-v1__image-placeholder" aria-hidden="true">
