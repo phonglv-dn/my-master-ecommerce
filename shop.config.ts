@@ -24,8 +24,8 @@ export const SHOP_CONFIG = {
   },
 
   layout: {
-    /** 'v1' = classic header  |  'v2' = sticky transparent header */
-    headerVariant: "v1" as "v1" | "v2",
+    /** 'v1' = classic header  |  'v2' = sticky transparent header | 'v3' = minimal high-fashion */
+    headerVariant: "v3" as "v1" | "v2" | "v3",
     /** 'v1' = fullscreen hero  |  'v2' = split-image hero */
     heroVariant: "v1" as "v1" | "v2",
     /** 'v1' = vertical card   |  'v2' = horizontal card */

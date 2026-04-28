@@ -5,6 +5,7 @@ import { ShoppingBag, Zap, Shield, Truck } from "lucide-react";
 import { SHOP_CONFIG } from "../../../shop.config";
 import HeaderV1 from "../../components/modular/HeaderV1/HeaderV1";
 import HeaderV2 from "../../components/modular/HeaderV2/HeaderV2";
+import { HeaderV3 } from "../../components/modular/HeaderV3";
 import ProductCardV1 from "../../components/modular/ProductCardV1/ProductCardV1";
 import ProductCardV2 from "../../components/modular/ProductCardV2/ProductCardV2";
 import { getProducts } from "../../../lib/supabase";
@@ -23,7 +24,9 @@ export default async function HomePage() {
     <main className="min-h-screen bg-white dark:bg-gray-950">
 
       {/* ── Header variants demo ─────────────────────────────────────────── */}
-      {activeHeader === "v1" ? <HeaderV1 /> : <HeaderV2 />}
+      {activeHeader === "v1" && <HeaderV1 />}
+      {activeHeader === "v2" && <HeaderV2 />}
+      {activeHeader === "v3" && <HeaderV3 />}
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-400 px-6 py-24 text-white">
