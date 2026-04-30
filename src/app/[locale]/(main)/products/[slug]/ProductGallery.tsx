@@ -59,42 +59,11 @@ export default function ProductGallery({
   const activeImage = hasImages ? images[activeIndex] : null;
 
   return (
-    <div className="flex w-full flex-1 flex-col gap-4 lg:max-w-[640px]">
+    <div className="flex w-full flex-1 flex-col gap-4">
       {/* Image + vertical thumb strip row (thumbs only show on lg+) */}
-      <div className="flex w-full gap-3">
-        {/* ── Vertical thumbnail strip (desktop, on the left of main image) ── */}
-        {hasMultiple && (
-          <div className="hidden w-[88px] shrink-0 flex-col gap-3 lg:flex">
-            {images.map((img, idx) => (
-              <button
-                key={`${img}-${idx}`}
-                type="button"
-                onClick={() => {
-                  setActiveIndex(idx);
-                  setImgError(false);
-                }}
-                aria-label={`${alt} — ${idx + 1}`}
-                aria-pressed={activeIndex === idx}
-                className={`relative aspect-square w-full overflow-hidden bg-[#f0efeb] transition ${
-                  activeIndex === idx
-                    ? "opacity-100 ring-1 ring-black"
-                    : "opacity-70 hover:opacity-100"
-                }`}
-              >
-                <Image
-                  src={img}
-                  alt={`${alt} - ${idx + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes="88px"
-                />
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* ── Main image ── */}
-        <div className="group relative aspect-square w-full flex-1 overflow-hidden bg-[#f0efeb] dark:bg-gray-800">
+      <div className="flex w-full gap-4">
+        {/* ── Main image (flush left) ── */}
+        <div className="group relative aspect-4/5 w-full flex-1 overflow-hidden bg-[#f0efeb] dark:bg-gray-800">
           {activeImage && !imgError ? (
             <Image
               key={activeImage}
@@ -166,6 +135,37 @@ export default function ProductGallery({
             </span>
           )}
         </div>
+
+        {/* ── Vertical thumbnail strip (desktop, on the right of main image) ── */}
+        {hasMultiple && (
+          <div className="hidden w-20 shrink-0 flex-col gap-3 lg:flex">
+            {images.map((img, idx) => (
+              <button
+                key={`${img}-${idx}`}
+                type="button"
+                onClick={() => {
+                  setActiveIndex(idx);
+                  setImgError(false);
+                }}
+                aria-label={`${alt} — ${idx + 1}`}
+                aria-pressed={activeIndex === idx}
+                className={`relative aspect-square w-full overflow-hidden bg-[#f0efeb] transition ${
+                  activeIndex === idx
+                    ? "opacity-100 ring-1 ring-black"
+                    : "opacity-70 hover:opacity-100"
+                }`}
+              >
+                <Image
+                  src={img}
+                  alt={`${alt} - ${idx + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="80px"
+                />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* ── Mobile horizontal thumbnail strip ── */}

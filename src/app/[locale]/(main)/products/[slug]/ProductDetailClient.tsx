@@ -43,7 +43,7 @@ export default function ProductDetailClient({
 
   return (
     <>
-      <div className="mx-auto flex max-w-7xl flex-col items-start justify-center gap-6 px-0 pb-24 md:flex-row md:gap-12 md:px-4 md:py-12 md:pb-20 lg:py-20">
+      <div className="mx-auto flex max-w-7xl flex-col items-start justify-center gap-6 px-0 pb-24 md:flex-row md:gap-10 md:px-4 md:py-12 md:pb-20 lg:gap-16 lg:py-20">
         <ProductGallery
           images={images}
           alt={localizedTitle}
@@ -51,23 +51,23 @@ export default function ProductDetailClient({
         />
 
         {/* ── Info Card ── */}
-        <div className="flex w-full shrink-0 flex-col gap-6 bg-[#f9f9f9] p-6 font-sans md:p-8 lg:w-[400px] dark:bg-gray-900">
+        <div className="flex w-full shrink-0 flex-col gap-6 border border-gray-200 bg-transparent p-6 font-sans md:p-8 lg:w-[400px] dark:border-gray-800">
           {localizedCategory && (
             <span className="text-[11px] uppercase tracking-[0.2em] text-gray-700 dark:text-gray-400">
               {localizedCategory}
             </span>
           )}
 
-          <div>
-            <h1 className="font-sans text-2xl font-semibold uppercase tracking-tight text-gray-900 dark:text-white">
+          <div className="flex flex-col gap-1">
+            <h1 className="mb-0 font-sans text-2xl font-semibold uppercase tracking-tight text-gray-900 dark:text-white">
               {localizedTitle}
             </h1>
-            <p className="mt-2 font-sans text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+            <p className="font-sans text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
               {priceDisplay}
             </p>
           </div>
 
-          <p className="text-sm normal-case leading-relaxed text-gray-800 dark:text-gray-200">
+          <p className="mt-2 text-sm normal-case leading-relaxed text-gray-800 dark:text-gray-200">
             {localizedDesc}
           </p>
 
@@ -108,7 +108,7 @@ export default function ProductDetailClient({
                 })}
               </div>
 
-              <div className="mt-3 flex gap-4 text-[10px] uppercase tracking-[0.2em] text-gray-600 dark:text-gray-400">
+              <div className="mt-3 flex gap-4 text-[10px] uppercase tracking-widest text-gray-500">
                 <button type="button" className="hover:text-black dark:hover:text-white">
                   {t("findYourSize")}
                 </button>
