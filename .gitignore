@@ -43,3 +43,7 @@ next-env.d.ts
 # Dev logs
 dev.log
 dev.pid
+
+# supabase CLI
+supabase/.temp/
+supabase/.branches/
