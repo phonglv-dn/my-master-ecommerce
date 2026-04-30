@@ -4,19 +4,32 @@ import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
 import ProductCard from "../ProductCard/ProductCard";
-import type { Category, Locale, Product } from "../../../../types";
+import type {
+  Category,
+  HomepageContent,
+  Locale,
+  LocalizedString,
+  Product,
+} from "../../../../types";
 
 interface CollectionsProps {
   products: Product[];
   categories: Category[];
+  content?: HomepageContent | null;
 }
 
 const ALL_TAB_ID = "ALL" as const;
 const MAX_VISIBLE = 6;
 
-export default function Collections({ products, categories }: CollectionsProps) {
+export default function Collections({
+  products,
+  categories,
+  content,
+}: CollectionsProps) {
   const locale = useLocale() as Locale;
   const t = useTranslations("collections");
+  const titleLd = content?.text_data?.title as LocalizedString | undefined;
+  const title = titleLd?.[locale] || t("title");
   const [activeTabId, setActiveTabId] = useState<string>(ALL_TAB_ID);
 
   // Only leaf categories (those with a parent) act as filterable tabs —
@@ -49,7 +62,7 @@ export default function Collections({ products, categories }: CollectionsProps) 
       {/* Header */}
       <div className="mb-16 text-center md:text-left">
         <h2 className="text-5xl md:text-7xl font-black uppercase leading-[0.85] tracking-tighter text-black">
-          {t("title")}
+          {title}
         </h2>
       </div>
 

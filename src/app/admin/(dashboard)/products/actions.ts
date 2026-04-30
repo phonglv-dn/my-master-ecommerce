@@ -2,8 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createServerClient } from "../../../../lib/supabase";
-import type { LocalizedString } from "../../../../types";
+import { createSupabaseServerClient } from "../../../../../lib/supabase/server";
+import { requireAdmin } from "../../../../../lib/auth";
+import type { LocalizedString } from "../../../../../types";
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
@@ -30,6 +31,7 @@ export async function createProduct(
   _prevState: CreateProductState,
   formData: FormData
 ): Promise<CreateProductState> {
+  await requireAdmin();
   const titleVi = (formData.get("title_vi") as string | null)?.trim() ?? "";
   const titleEn = (formData.get("title_en") as string | null)?.trim() ?? "";
   const descVi = (formData.get("desc_vi") as string | null)?.trim() ?? "";
@@ -57,7 +59,7 @@ export async function createProduct(
   const description: LocalizedString = { vi: descVi, en: descEn };
 
   // ── Insert ──────────────────────────────────────────────────────────────────
-  const db = createServerClient();
+  const db = await createSupabaseServerClient();
   const { error } = await db.from("products").insert({
     title,
     description,
@@ -84,7 +86,8 @@ export async function createProduct(
 // ── deleteProduct ─────────────────────────────────────────────────────────────
 
 export async function deleteProduct(id: string): Promise<void> {
-  const db = createServerClient();
+  await requireAdmin();
+  const db = await createSupabaseServerClient();
   const { error } = await db.from("products").delete().eq("id", id);
   if (error) {
     console.error("[admin] deleteProduct error:", error.message);
@@ -99,6 +102,7 @@ export async function updateProduct(
   _prevState: CreateProductState,
   formData: FormData
 ): Promise<CreateProductState> {
+  await requireAdmin();
   const titleVi = (formData.get("title_vi") as string | null)?.trim() ?? "";
   const titleEn = (formData.get("title_en") as string | null)?.trim() ?? "";
   const descVi = (formData.get("desc_vi") as string | null)?.trim() ?? "";
@@ -126,7 +130,7 @@ export async function updateProduct(
   const description: LocalizedString = { vi: descVi, en: descEn };
 
   // ── Update ──────────────────────────────────────────────────────────────────
-  const db = createServerClient();
+  const db = await createSupabaseServerClient();
   const { error } = await db
     .from("products")
     .update({

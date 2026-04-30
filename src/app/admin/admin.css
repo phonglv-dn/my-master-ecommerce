@@ -103,6 +103,29 @@
   padding: 1rem 1.25rem 0;
   border-top: 1px solid rgba(99, 102, 241, 0.1);
   margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-sidebar__user {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin-bottom: 0.25rem;
+}
+
+.admin-sidebar__user-icon {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+}
+
+.admin-sidebar__user-email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .admin-sidebar__back-link {
@@ -110,6 +133,12 @@
   color: #4b5563;
   text-decoration: none;
   transition: color 0.15s;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .admin-sidebar__back-link:hover {

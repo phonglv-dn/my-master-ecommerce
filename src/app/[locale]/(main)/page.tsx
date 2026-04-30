@@ -1,32 +1,37 @@
 import { getTranslations } from "next-intl/server"
-import { ShoppingBag, Zap, Shield, Truck } from "lucide-react"
 import { SHOP_CONFIG } from "../../../../shop.config"
 import { HeroV3 } from "../../../components/modular/HeroV3"
-import ProductCardV1 from "../../../components/modular/ProductCardV1/ProductCardV1"
-import ProductCardV2 from "../../../components/modular/ProductCardV2/ProductCardV2"
 import NewThisWeek from "../../../components/modular/NewThisWeek/NewThisWeek"
 import Collections from "../../../components/modular/Collections/Collections"
 import { LookbookApproach } from "../../../components/modular/LookbookApproach"
-import { getProducts, getCategories } from "../../../../lib/supabase"
+import {
+  getProducts,
+  getCategories,
+  getHomepageBlock,
+} from "../../../../lib/supabase"
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 export default async function HomePage() {
   const t = await getTranslations("home")
   const tc = await getTranslations("common")
 
-  const [products, categories] = await Promise.all([
-    getProducts({ limit: 12, withCategory: true }),
-    getCategories(),
-  ])
+  const [products, categories, heroContent, newThisWeekContent, collectionsContent, lookbookContent] =
+    await Promise.all([
+      getProducts({ limit: 12, withCategory: true }),
+      getCategories(),
+      getHomepageBlock("hero"),
+      getHomepageBlock("new_this_week"),
+      getHomepageBlock("collections"),
+      getHomepageBlock("lookbook"),
+    ])
 
   const activeHero = SHOP_CONFIG.layout.heroVariant
-  const activeCard = SHOP_CONFIG.layout.cardVariant
 
   return (
     <main className='min-h-screen bg-white dark:bg-gray-950'>
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       {activeHero === "v3" ? (
-        <HeroV3 />
+        <HeroV3 content={heroContent} />
       ) : (
         <section className='relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-400 px-6 py-24 text-white'>
           <div className='mx-auto max-w-4xl text-center'>
@@ -57,13 +62,13 @@ export default async function HomePage() {
       )}
 
       {/* ── New This Week ─────────────────────────────────────────────────── */}
-      <NewThisWeek products={products} />
+      <NewThisWeek products={products} content={newThisWeekContent} />
 
       {/* ── Collections ────────────────────────────────────────────────────── */}
-      <Collections products={products} categories={categories} />
+      <Collections products={products} categories={categories} content={collectionsContent} />
 
       {/* ── Lookbook Approach ──────────────────────────────────────────────── */}
-      <LookbookApproach />
+      <LookbookApproach content={lookbookContent} />
     </main>
   )
 }

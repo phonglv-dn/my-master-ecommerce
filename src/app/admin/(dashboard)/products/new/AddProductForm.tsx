@@ -3,7 +3,7 @@
 import { useActionState, useState } from "react";
 import Link from "next/link";
 import { createProduct, type CreateProductState } from "../actions";
-import { SHOP_CONFIG } from "../../../../../shop.config";
+import { SHOP_CONFIG } from "../../../../../../shop.config";
 
 const EXCHANGE_RATE = SHOP_CONFIG.currencies.exchangeRate; // 25_000
 

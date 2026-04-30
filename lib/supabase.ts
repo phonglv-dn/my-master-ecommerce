@@ -1,5 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
-import type { Product, Category } from "../types";
+import type {
+  Product,
+  Category,
+  HomepageBlockKey,
+  HomepageContent,
+} from "../types";
 
 // ── Environment variables ────────────────────────────────────────────────────
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -94,6 +99,26 @@ export async function getProducts(options?: {
     return [];
   }
   return (data ?? []) as unknown as Product[];
+}
+
+/**
+ * Fetch a single homepage block by key, or null if missing.
+ * Storefront uses null fallback to render i18n defaults.
+ */
+export async function getHomepageBlock(
+  blockKey: HomepageBlockKey
+): Promise<HomepageContent | null> {
+  const { data, error } = await supabase
+    .from("homepage_content")
+    .select("*")
+    .eq("block_key", blockKey)
+    .maybeSingle();
+
+  if (error) {
+    console.error("[supabase] getHomepageBlock error:", error.message);
+    return null;
+  }
+  return (data as HomepageContent | null) ?? null;
 }
 
 /**

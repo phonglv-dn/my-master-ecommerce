@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getProducts } from "../../../../lib/supabase";
-import { formatPrice } from "../../../../lib/formatPrice";
-import { SHOP_CONFIG } from "../../../../shop.config";
+import { getProducts } from "../../../../../lib/supabase";
+import { formatPrice } from "../../../../../lib/formatPrice";
+import { SHOP_CONFIG } from "../../../../../shop.config";
 import { deleteProduct } from "./actions";
-import type { Product } from "../../../../types";
+import type { Product } from "../../../../../types";
 
 export const metadata: Metadata = { title: "Danh sách sản phẩm" };
 

@@ -61,6 +61,27 @@ export interface HeroBanner {
   updated_at: string;
 }
 
+// ── Homepage CMS ────────────────────────────────────────────────────────────
+
+export type HomepageBlockKey =
+  | "hero"
+  | "new_this_week"
+  | "collections"
+  | "lookbook";
+
+export interface LookbookImage {
+  url: string;
+  alt_vi: string;
+  alt_en: string;
+}
+
+export interface HomepageContent {
+  block_key: HomepageBlockKey;
+  text_data: Record<string, LocalizedString>;
+  image_data: { images?: LookbookImage[] };
+  updated_at: string;
+}
+
 // ── API / UI helpers ────────────────────────────────────────────────────────
 
 /** A product enriched with a pre-formatted price string for display. */

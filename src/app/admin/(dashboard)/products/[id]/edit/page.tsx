@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProducts } from "../../../../../../lib/supabase";
+import { getProducts } from "../../../../../../../lib/supabase";
 import EditProductForm from "./EditProductForm";
 
 export const metadata: Metadata = { title: "Sửa sản phẩm" };

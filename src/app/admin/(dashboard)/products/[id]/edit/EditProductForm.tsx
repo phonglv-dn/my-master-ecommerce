@@ -3,8 +3,8 @@
 import { useActionState, useState } from "react";
 import Link from "next/link";
 import { updateProduct, type CreateProductState } from "../../actions";
-import { SHOP_CONFIG } from "../../../../../../shop.config";
-import type { Product } from "../../../../../../types";
+import { SHOP_CONFIG } from "../../../../../../../shop.config";
+import type { Product } from "../../../../../../../types";
 
 const EXCHANGE_RATE = SHOP_CONFIG.currencies.exchangeRate; // 25_000
 

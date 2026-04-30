@@ -2,17 +2,29 @@
 
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import ProductCard from "../ProductCard/ProductCard";
-import type { Product } from "../../../../types";
+import type {
+  HomepageContent,
+  Locale,
+  LocalizedString,
+  Product,
+} from "../../../../types";
 
 interface NewThisWeekProps {
   products: Product[];
+  content?: HomepageContent | null;
 }
 
-export default function NewThisWeek({ products }: NewThisWeekProps) {
+export default function NewThisWeek({ products, content }: NewThisWeekProps) {
   const t = useTranslations("newThisWeek");
   const tc = useTranslations("common");
+  const locale = useLocale() as Locale;
+
+  const pick = (key: string, fallbackKey: string) => {
+    const ld = content?.text_data?.[key] as LocalizedString | undefined;
+    return ld?.[locale] || t(fallbackKey);
+  };
 
   // Use up to 4 products for this section
   const displayProducts = products.slice(0, 4);
@@ -22,9 +34,9 @@ export default function NewThisWeek({ products }: NewThisWeekProps) {
       {/* Header Area */}
       <div className="mb-12 flex items-end justify-between">
         <h2 className="flex flex-col text-5xl md:text-7xl font-black uppercase leading-[0.85] tracking-tighter text-black">
-          <span>{t("titleLine1")}</span>
+          <span>{pick("titleLine1", "titleLine1")}</span>
           <span className="flex items-start">
-            {t("titleLine2")}
+            {pick("titleLine2", "titleLine2")}
             <sup className="ml-2 mt-1 text-base md:text-xl font-bold text-black/60 tracking-normal">(50)</sup>
           </span>
         </h2>
@@ -33,7 +45,7 @@ export default function NewThisWeek({ products }: NewThisWeekProps) {
           href="/collections/new"
           className="group flex items-center text-sm font-semibold uppercase tracking-widest text-black hover:underline underline-offset-4"
         >
-          {t("seeAll")}
+          {pick("seeAll", "seeAll")}
         </Link>
       </div>
 
