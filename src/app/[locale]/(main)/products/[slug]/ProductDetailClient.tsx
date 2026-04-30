@@ -105,10 +105,6 @@ export default function ProductDetailClient({
             </p>
           </div>
 
-          <p className="text-xs uppercase tracking-[0.18em] text-gray-700 dark:text-gray-400">
-            {t("mrpNote")}
-          </p>
-
           <p className="text-sm normal-case leading-relaxed text-gray-800 dark:text-gray-200">
             {localizedDesc}
           </p>
