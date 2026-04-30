@@ -26,7 +26,7 @@ export interface Category {
 }
 
 /** Vocabulary-locked color buckets used for filter facets. */
-export type ColorFamily = "black" | "white";
+export type ColorFamily = "black" | "white" | "gray";
 
 /** Vocabulary-locked fit values used for filter facets. */
 export type Fit = "slim" | "regular" | "oversized";

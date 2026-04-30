@@ -20,7 +20,8 @@
     "next": "Sau",
     "language": "Ngôn ngữ",
     "languageAria": "Chuyển đổi ngôn ngữ",
-    "wishlist": "Yêu thích"
+    "wishlist": "Yêu thích",
+    "close": "Đóng"
   },
   "home": {
     "heroTitle": "Mua sắm thông minh,\nGiao hàng nhanh chóng",
@@ -73,6 +74,19 @@
     "socials": "Mạng xã hội (Instagram/TikTok)",
     "copyright": "© 2026 — SBLVK. Mọi quyền được bảo lưu.",
     "privacy": "Quyền riêng tư"
+  },
+  "productList": {
+    "pageTitle": "Tất cả sản phẩm",
+    "search": "Tìm kiếm",
+    "searchPlaceholder": "Tìm sản phẩm...",
+    "filters": "Bộ lọc",
+    "category": "Danh mục",
+    "size": "Kích cỡ",
+    "colors": "Màu sắc",
+    "all": "Tất cả",
+    "clearFilters": "Xóa bộ lọc",
+    "empty": "Không có sản phẩm nào khớp với bộ lọc.",
+    "resultsCount": "{count} sản phẩm"
   },
   "product": {
     "price": "Giá",

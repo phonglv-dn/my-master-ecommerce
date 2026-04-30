@@ -20,7 +20,8 @@
     "next": "Next",
     "language": "Language",
     "languageAria": "Language switcher",
-    "wishlist": "Wishlist"
+    "wishlist": "Wishlist",
+    "close": "Close"
   },
   "home": {
     "heroTitle": "Shop Smart,\nDeliver Fast",
@@ -73,6 +74,19 @@
     "socials": "Socials (Instagram/TikTok)",
     "copyright": "© 2026 — SBLVK. All rights reserved.",
     "privacy": "Privacy"
+  },
+  "productList": {
+    "pageTitle": "All Products",
+    "search": "Search",
+    "searchPlaceholder": "Search products...",
+    "filters": "Filters",
+    "category": "Category",
+    "size": "Size",
+    "colors": "Colors",
+    "all": "All",
+    "clearFilters": "Clear filters",
+    "empty": "No products match your filters.",
+    "resultsCount": "{count} {count, plural, one {product} other {products}}"
   },
   "product": {
     "price": "Price",

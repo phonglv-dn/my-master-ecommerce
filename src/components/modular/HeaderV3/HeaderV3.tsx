@@ -1,12 +1,13 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
 import { Heart, ShoppingBag, User, Search } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 import type { Category } from "../../../../types"
 import { useCart } from "../../../contexts/CartContext"
 import { MinimalLocaleSwitch } from "../LocaleSwitcher"
+import { buildCategoryTree } from "../../../../utils/categoryUtils"
 
 interface HeaderV3Props {
   categories?: Category[]
@@ -18,6 +19,13 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
   const tc = useTranslations("common")
   const th = useTranslations("header")
   const { totalItems } = useCart()
+
+  // Hierarchical view of categories — drives the overlay menu's grouping and
+  // is the same shape a future hover Mega Menu will consume.
+  const categoryTree = useMemo(
+    () => buildCategoryTree(categories),
+    [categories]
+  )
 
   // Prevent scrolling when menu is open
   useEffect(() => {
@@ -162,24 +170,74 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
             />
           </div>
 
-          {/* Navigation Categories */}
+          {/* Navigation Categories — tree-aware: parents become section labels,
+              children render as the giant clickable links below. */}
           <nav className='flex flex-col gap-6 md:gap-10'>
-            {categories.length > 0
-              ? categories.map((category, index) => (
-                  <Link
-                    key={category.id}
-                    href={`/collections/${category.slug}`}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`text-5xl md:text-7xl font-black uppercase tracking-tighter text-[#1C1C1C] hover:text-gray-500 transition-all duration-700 hover:translate-x-4 w-fit ${
-                      isMenuOpen
-                        ? "opacity-100 translate-x-0"
-                        : "opacity-0 -translate-x-8"
-                    }`}
-                    style={{ transitionDelay: `${200 + index * 100}ms` }}
-                  >
-                    {category.name[locale] || category.name.vi}
-                  </Link>
-                ))
+            {categoryTree.length > 0
+              ? categoryTree.map((parent, parentIndex) => {
+                  const parentLabel =
+                    parent.name[locale] || parent.name.vi
+                  const baseDelay = 200 + parentIndex * 150
+
+                  // Top-level category with no children — render as a giant link.
+                  if (parent.children.length === 0) {
+                    return (
+                      <Link
+                        key={parent.id}
+                        href={`/${locale}/products?category=${parent.slug}`}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={`text-5xl md:text-7xl font-black uppercase tracking-tighter text-[#1C1C1C] hover:text-gray-500 transition-all duration-700 hover:translate-x-4 w-fit ${
+                          isMenuOpen
+                            ? "opacity-100 translate-x-0"
+                            : "opacity-0 -translate-x-8"
+                        }`}
+                        style={{ transitionDelay: `${baseDelay}ms` }}
+                      >
+                        {parentLabel}
+                      </Link>
+                    )
+                  }
+
+                  // Parent group: small label + its children as the giant links.
+                  return (
+                    <div
+                      key={parent.id}
+                      className='flex flex-col gap-3 md:gap-4'
+                    >
+                      <span
+                        className={`text-[11px] md:text-xs font-medium uppercase tracking-[0.3em] text-black/40 transition-all duration-700 ${
+                          isMenuOpen
+                            ? "opacity-100 translate-x-0"
+                            : "opacity-0 -translate-x-8"
+                        }`}
+                        style={{ transitionDelay: `${baseDelay}ms` }}
+                      >
+                        {parentLabel}
+                      </span>
+                      <div className='flex flex-col gap-3 md:gap-5'>
+                        {parent.children.map((child, childIndex) => (
+                          <Link
+                            key={child.id}
+                            href={`/${locale}/products?category=${child.slug}`}
+                            onClick={() => setIsMenuOpen(false)}
+                            className={`text-5xl md:text-7xl font-black uppercase tracking-tighter text-[#1C1C1C] hover:text-gray-500 transition-all duration-700 hover:translate-x-4 w-fit ${
+                              isMenuOpen
+                                ? "opacity-100 translate-x-0"
+                                : "opacity-0 -translate-x-8"
+                            }`}
+                            style={{
+                              transitionDelay: `${
+                                baseDelay + 80 + childIndex * 80
+                              }ms`,
+                            }}
+                          >
+                            {child.name[locale] || child.name.vi}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                })
               : ["Men", "Women", "Kids"].map((item, index) => (
                   <Link
                     key={item}

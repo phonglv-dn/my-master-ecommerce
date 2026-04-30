@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import type {
   Product,
   Category,
+  ColorFamily,
   HomepageBlockKey,
   HomepageContent,
 } from "../types";
@@ -62,35 +63,55 @@ export async function getProductBySlug(
 }
 
 /**
- * Fetch all products, optionally filtered by category slug.
+ * Fetch products, optionally filtered by category slug, color family, and/or size.
+ *
+ * Filters:
+ * - `categorySlug` joins `categories` and filters by its slug column.
+ * - `colorFamily` matches the vocabulary-locked `color_family` column.
+ * - `size` matches when the product's `sizes` text[] contains the value.
  */
 export async function getProducts(options?: {
   categorySlug?: string;
+  colorFamily?: ColorFamily;
+  size?: string;
   limit?: number;
   offset?: number;
   withCategory?: boolean;
 }): Promise<Product[]> {
-  const { categorySlug, limit = 20, offset = 0, withCategory = false } =
-    options ?? {};
+  const {
+    categorySlug,
+    colorFamily,
+    size,
+    limit = 20,
+    offset = 0,
+    withCategory = false,
+  } = options ?? {};
+
+  // Pick a select string. When filtering by category slug we need an inner join;
+  // otherwise the join is optional and only added when callers ask for it.
+  const selectString = categorySlug
+    ? withCategory
+      ? "*, category:categories!inner(*)"
+      : "*, category:categories!inner(slug)"
+    : withCategory
+      ? "*, category:categories(*)"
+      : "*";
 
   let query = supabase
     .from("products")
-    .select(withCategory ? "*, category:categories(*)" : "*")
+    .select(selectString)
     .order("created_at", { ascending: false })
     .range(offset, offset + limit - 1);
 
   if (categorySlug) {
-    // Join to filter by category slug
-    query = supabase
-      .from("products")
-      .select(
-        withCategory
-          ? "*, category:categories!inner(*)"
-          : "*, category:categories!inner(slug)"
-      )
-      .eq("category.slug", categorySlug)
-      .order("created_at", { ascending: false })
-      .range(offset, offset + limit - 1);
+    query = query.eq("category.slug", categorySlug);
+  }
+  if (colorFamily) {
+    query = query.eq("color_family", colorFamily);
+  }
+  if (size) {
+    // `sizes` is a text[] column — `contains` checks set membership.
+    query = query.contains("sizes", [size]);
   }
 
   const { data, error } = await query;
