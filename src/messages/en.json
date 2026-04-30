@@ -80,7 +80,18 @@
     "outOfStock": "Out of Stock",
     "quantity": "Quantity",
     "description": "Product Description",
-    "reviews": "Reviews"
+    "reviews": "Reviews",
+    "mrpNote": "MRP incl. of all taxes",
+    "color": "Color",
+    "size": "Size",
+    "findYourSize": "Find your size",
+    "measurementGuide": "Measurement guide",
+    "add": "Add",
+    "prevImage": "Previous image",
+    "nextImage": "Next image",
+    "expandImage": "Expand image",
+    "close": "Close",
+    "back": "Back"
   },
   "cart": {
     "empty": "Your cart is empty",

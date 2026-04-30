@@ -25,6 +25,12 @@ export interface Category {
   created_at: string;
 }
 
+/** Vocabulary-locked color buckets used for filter facets. */
+export type ColorFamily = "black" | "white";
+
+/** Vocabulary-locked fit values used for filter facets. */
+export type Fit = "slim" | "regular" | "oversized";
+
 export interface Product {
   id: string;
   /** Localized product title. */
@@ -41,8 +47,18 @@ export interface Product {
   stock: number;
   /** Foreign key to categories table. */
   category_id: string | null;
-  /** Color code for specific shades (e.g. Matte Black) */
+  /** Display name of the shade (e.g. "Carbon Black"). */
   color_code?: string | null;
+  /** Filter facet bucket — used by collection filters. */
+  color_family?: ColorFamily | null;
+  /** Hex value parked for future visual use (currently unused on PDP). */
+  swatch_hex?: string | null;
+  /** Filter facet: silhouette / cut. */
+  fit?: Fit | null;
+  /** Filter facet: fabric (free-form, e.g. "cotton", "wool"). */
+  material?: string | null;
+  /** Selectable size labels rendered on the PDP (e.g. "XS", "S", "M"). */
+  sizes: string[];
   created_at: string;
   updated_at: string;
   /** Populated when joined with categories. */

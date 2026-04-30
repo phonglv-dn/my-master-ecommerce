@@ -80,7 +80,18 @@
     "outOfStock": "Hết hàng",
     "quantity": "Số lượng",
     "description": "Mô tả sản phẩm",
-    "reviews": "Đánh giá"
+    "reviews": "Đánh giá",
+    "mrpNote": "Giá đã bao gồm thuế",
+    "color": "Màu sắc",
+    "size": "Kích cỡ",
+    "findYourSize": "Tìm size phù hợp",
+    "measurementGuide": "Hướng dẫn đo size",
+    "add": "Thêm vào giỏ",
+    "prevImage": "Ảnh trước",
+    "nextImage": "Ảnh kế tiếp",
+    "expandImage": "Phóng to",
+    "close": "Đóng",
+    "back": "Quay lại"
   },
   "cart": {
     "empty": "Giỏ hàng trống",

@@ -53,6 +53,7 @@ export default async function AdminProductsPage() {
               <tr>
                 <th>Tên sản phẩm</th>
                 <th>Slug</th>
+                <th>Màu</th>
                 <th>Giá (VNĐ)</th>
                 <th>Giá (USD)</th>
                 <th>Kho</th>
@@ -75,6 +76,42 @@ export default async function AdminProductsPage() {
                     </td>
                     <td>
                       <span className="admin-table__slug">{p.slug}</span>
+                    </td>
+                    <td>
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                        {p.swatch_hex && (
+                          <span
+                            aria-hidden
+                            style={{
+                              display: "inline-block",
+                              width: "0.85rem",
+                              height: "0.85rem",
+                              borderRadius: "9999px",
+                              border: "1px solid #cbd5e0",
+                              backgroundColor: p.swatch_hex,
+                              flexShrink: 0,
+                            }}
+                          />
+                        )}
+                        <span style={{ fontSize: "0.85rem", color: "#374151" }}>
+                          {p.color_code ?? <em style={{ color: "#9ca3af" }}>—</em>}
+                        </span>
+                        {p.color_family && (
+                          <span
+                            style={{
+                              fontSize: "0.7rem",
+                              padding: "1px 6px",
+                              borderRadius: "9999px",
+                              background: "#f3f4f6",
+                              color: "#6b7280",
+                              textTransform: "uppercase",
+                              letterSpacing: "0.04em",
+                            }}
+                          >
+                            {p.color_family}
+                          </span>
+                        )}
+                      </div>
                     </td>
                     <td>
                       <span className="admin-table__price">{priceVnd}</span>

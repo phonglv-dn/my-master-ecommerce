@@ -8,6 +8,8 @@ const withNextIntl = createNextIntlPlugin(
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Hide the on-screen route-status pill ("N") shown in dev mode.
+  devIndicators: false,
   images: {
     remotePatterns: [
       {

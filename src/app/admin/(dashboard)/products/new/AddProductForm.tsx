@@ -24,6 +24,8 @@ const INITIAL_STATE: CreateProductState = {};
 
 type LangTab = "vi" | "en";
 
+const SIZE_OPTIONS = ["XS", "S", "M", "L", "XL", "2X", "3X"] as const;
+
 export default function AddProductForm() {
   const [state, formAction, isPending] = useActionState(
     createProduct,
@@ -45,6 +47,15 @@ export default function AddProductForm() {
 
   const [titleVi, setTitleVi] = useState("");
   const [slug, setSlug] = useState("");
+
+  // Variant / filter attribute state
+  const [swatchHex, setSwatchHex] = useState("");
+  const [sizes, setSizes] = useState<string[]>([]);
+
+  const toggleSize = (s: string) =>
+    setSizes((prev) =>
+      prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]
+    );
 
   const handleTitleViChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
@@ -215,6 +226,142 @@ export default function AddProductForm() {
               defaultValue={0}
             />
           </div>
+        </div>
+      </div>
+
+      {/* ── Thuộc tính sản phẩm ─────────────────────────────────────────────── */}
+      <div className="admin-card">
+        <p className="admin-section__title" style={{ marginBottom: "1rem" }}>
+          Thuộc tính sản phẩm
+        </p>
+
+        <div className="admin-form__row">
+          <div className="admin-field">
+            <label htmlFor="color_code">Tên màu (hiển thị)</label>
+            <input
+              id="color_code"
+              name="color_code"
+              type="text"
+              placeholder="Ví dụ: Carbon Black, Off White..."
+            />
+            <p className="admin-field__hint">Hiển thị trên trang chi tiết.</p>
+          </div>
+
+          <div className="admin-field">
+            <label htmlFor="color_family">Họ màu (filter)</label>
+            <select id="color_family" name="color_family" defaultValue="">
+              <option value="">— Không chọn —</option>
+              <option value="black">Đen (black)</option>
+              <option value="white">Trắng (white)</option>
+            </select>
+            <p className="admin-field__hint">
+              Bucket dùng cho filter trên collection.
+            </p>
+          </div>
+        </div>
+
+        <div className="admin-form__row">
+          <div className="admin-field">
+            <label>Mã hex swatch</label>
+            <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+              <input
+                type="color"
+                value={swatchHex || "#000000"}
+                onChange={(e) => setSwatchHex(e.target.value)}
+                style={{
+                  width: "3rem",
+                  height: "2.5rem",
+                  padding: 0,
+                  border: "1px solid #cbd5e0",
+                  cursor: "pointer",
+                }}
+              />
+              <input
+                type="text"
+                value={swatchHex}
+                onChange={(e) => setSwatchHex(e.target.value)}
+                placeholder="#000000 (để trống = không có)"
+                style={{ flex: 1 }}
+              />
+              {swatchHex && (
+                <button
+                  type="button"
+                  onClick={() => setSwatchHex("")}
+                  className="admin-btn admin-btn--ghost"
+                  style={{ padding: "0.4rem 0.75rem", fontSize: "0.8rem" }}
+                >
+                  Xoá
+                </button>
+              )}
+            </div>
+            <input type="hidden" name="swatch_hex" value={swatchHex} />
+            <p className="admin-field__hint">
+              Dự phòng cho UI swatch sau này. Có thể bỏ trống.
+            </p>
+          </div>
+
+          <div className="admin-field">
+            <label htmlFor="fit">Form (cut)</label>
+            <select id="fit" name="fit" defaultValue="">
+              <option value="">— Không chọn —</option>
+              <option value="slim">Slim</option>
+              <option value="regular">Regular</option>
+              <option value="oversized">Oversized</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="admin-field">
+          <label htmlFor="material">Chất liệu</label>
+          <input
+            id="material"
+            name="material"
+            type="text"
+            placeholder="Ví dụ: cotton, wool, linen, blend"
+          />
+        </div>
+
+        <div className="admin-field">
+          <label>Sizes có sẵn</label>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "0.5rem",
+              marginTop: "0.4rem",
+            }}
+          >
+            {SIZE_OPTIONS.map((s) => {
+              const on = sizes.includes(s);
+              return (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => toggleSize(s)}
+                  aria-pressed={on}
+                  style={{
+                    minWidth: "2.5rem",
+                    padding: "0.5rem 0.85rem",
+                    border: `1px solid ${on ? "#000" : "#cbd5e0"}`,
+                    background: on ? "#000" : "#fff",
+                    color: on ? "#fff" : "#374151",
+                    fontSize: "0.85rem",
+                    fontWeight: 500,
+                    cursor: "pointer",
+                    borderRadius: "4px",
+                  }}
+                >
+                  {s}
+                </button>
+              );
+            })}
+          </div>
+          {sizes.map((s) => (
+            <input key={s} type="hidden" name="sizes" value={s} />
+          ))}
+          <p className="admin-field__hint">
+            Click để chọn các size sản phẩm có sẵn.
+          </p>
         </div>
       </div>
 

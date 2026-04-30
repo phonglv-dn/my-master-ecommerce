@@ -12,12 +12,62 @@ function slugify(text: string): string {
   return text
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[̀-ͯ]/g, "")
     .replace(/[đĐ]/g, "d")
     .replace(/[^a-z0-9\s-]/g, "")
     .trim()
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-");
+}
+
+function emptyToNull(v: unknown): string | null {
+  const s = typeof v === "string" ? v.trim() : "";
+  return s === "" ? null : s;
+}
+
+const COLOR_FAMILIES = ["black", "white"] as const;
+const FITS = ["slim", "regular", "oversized"] as const;
+const HEX_RE = /^#[0-9a-fA-F]{6}$/;
+
+type ProductAttrs = {
+  color_code: string | null;
+  color_family: string | null;
+  swatch_hex: string | null;
+  fit: string | null;
+  material: string | null;
+  sizes: string[];
+};
+
+/**
+ * Parse + validate the variant/filter attributes shared between create + update.
+ * Returns either { attrs } on success or { error } on validation failure.
+ */
+function parseAttrs(formData: FormData):
+  | { attrs: ProductAttrs }
+  | { error: string } {
+  const color_code = emptyToNull(formData.get("color_code"));
+  const color_family = emptyToNull(formData.get("color_family"));
+  const swatch_hex = emptyToNull(formData.get("swatch_hex"));
+  const fit = emptyToNull(formData.get("fit"));
+  const material = emptyToNull(formData.get("material"));
+  const sizes = formData
+    .getAll("sizes")
+    .map((s) => String(s).trim())
+    .filter(Boolean);
+
+  if (color_family && !COLOR_FAMILIES.includes(color_family as (typeof COLOR_FAMILIES)[number])) {
+    return { error: `Họ màu không hợp lệ. Chọn một trong: ${COLOR_FAMILIES.join(", ")}.` };
+  }
+  if (fit && !FITS.includes(fit as (typeof FITS)[number])) {
+    return { error: `Form không hợp lệ. Chọn một trong: ${FITS.join(", ")}.` };
+  }
+  if (swatch_hex && !HEX_RE.test(swatch_hex)) {
+    return { error: `Mã hex swatch phải có dạng #RRGGBB (ví dụ #0B0B0B).` };
+  }
+
+  return {
+    attrs: { color_code, color_family, swatch_hex, fit, material, sizes },
+  };
 }
 
 // ── createProduct ─────────────────────────────────────────────────────────────
@@ -55,6 +105,9 @@ export async function createProduct(
   const slug = customSlug || slugify(titleVi);
   if (!slug) return { error: "Không thể tạo slug từ tên sản phẩm." };
 
+  const attrsResult = parseAttrs(formData);
+  if ("error" in attrsResult) return { error: attrsResult.error };
+
   const title: LocalizedString = { vi: titleVi, en: titleEn };
   const description: LocalizedString = { vi: descVi, en: descEn };
 
@@ -67,10 +120,10 @@ export async function createProduct(
     slug,
     stock,
     images: [],
+    ...attrsResult.attrs,
   });
 
   if (error) {
-    // Duplicate slug
     if (error.code === "23505") {
       return {
         error: `Slug "${slug}" đã tồn tại. Hãy đặt slug khác hoặc đổi tên sản phẩm.`,
@@ -126,6 +179,9 @@ export async function updateProduct(
   const slug = customSlug || slugify(titleVi);
   if (!slug) return { error: "Không thể tạo slug từ tên sản phẩm." };
 
+  const attrsResult = parseAttrs(formData);
+  if ("error" in attrsResult) return { error: attrsResult.error };
+
   const title: LocalizedString = { vi: titleVi, en: titleEn };
   const description: LocalizedString = { vi: descVi, en: descEn };
 
@@ -139,11 +195,11 @@ export async function updateProduct(
       price_vnd: price,
       slug,
       stock,
+      ...attrsResult.attrs,
     })
     .eq("id", id);
 
   if (error) {
-    // Duplicate slug
     if (error.code === "23505") {
       return {
         error: `Slug "${slug}" đã tồn tại. Hãy đặt slug khác hoặc đổi tên sản phẩm.`,
@@ -154,8 +210,5 @@ export async function updateProduct(
 
   revalidatePath("/admin/products");
   revalidatePath(`/admin/products/${id}/edit`);
-  // also should revalidate the storefront product page, but we don't know the locale
-  // Next.js revalidatePath is usually path-specific, but maybe layout is enough?
-  
   redirect("/admin/products");
 }

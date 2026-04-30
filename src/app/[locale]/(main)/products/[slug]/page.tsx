@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import { getProductBySlug } from "../../../../../../lib/supabase";
+import { getLocalizedText } from "../../../../../../lib/getLocalizedText";
+import type { Locale } from "../../../../../../shop.config";
 import ProductDetailClient from "./ProductDetailClient";
 import type { Metadata } from "next";
 
@@ -13,8 +15,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!product) return {};
 
-  const title = product.title[locale as keyof typeof product.title] ?? product.title.vi;
-  const description = product.description?.[locale as keyof typeof product.description] ?? product.description?.vi ?? "";
+  const title = getLocalizedText(product.title, locale as Locale);
+  const description = getLocalizedText(product.description, locale as Locale);
 
   return {
     title,
