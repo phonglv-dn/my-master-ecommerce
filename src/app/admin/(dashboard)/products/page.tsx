@@ -3,27 +3,10 @@ import Link from "next/link";
 import { getProducts } from "../../../../../lib/supabase";
 import { formatPrice } from "../../../../../lib/formatPrice";
 import { SHOP_CONFIG } from "../../../../../shop.config";
-import { deleteProduct } from "./actions";
+import { DeleteProductButton } from "./DeleteProductButton";
 import type { Product } from "../../../../../types";
 
 export const metadata: Metadata = { title: "Danh sách sản phẩm" };
-
-// ── Delete button ─────────────────────────────────────────────────────────────
-async function DeleteBtn({ id }: { id: string }) {
-  const action = deleteProduct.bind(null, id);
-  return (
-    <form action={action}>
-      <button
-        type="submit"
-        className="admin-btn admin-btn--danger"
-        id={`delete-${id}`}
-        onClick={undefined}
-      >
-        Xoá
-      </button>
-    </form>
-  );
-}
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 export default async function AdminProductsPage() {
@@ -119,7 +102,7 @@ export default async function AdminProductsPage() {
                         >
                           Sửa
                         </Link>
-                        <DeleteBtn id={p.id} />
+                        <DeleteProductButton id={p.id} title={title} />
                       </div>
                     </td>
                   </tr>
