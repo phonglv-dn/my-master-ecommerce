@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
 import ProductCard from "../ProductCard/ProductCard";
 import type { Category, Locale, Product } from "../../../../types";
@@ -16,6 +16,7 @@ const MAX_VISIBLE = 6;
 
 export default function Collections({ products, categories }: CollectionsProps) {
   const locale = useLocale() as Locale;
+  const t = useTranslations("collections");
   const [activeTabId, setActiveTabId] = useState<string>(ALL_TAB_ID);
 
   // Only leaf categories (those with a parent) act as filterable tabs —
@@ -27,13 +28,13 @@ export default function Collections({ products, categories }: CollectionsProps) 
 
   const tabs = useMemo(
     () => [
-      { id: ALL_TAB_ID, label: "All" },
+      { id: ALL_TAB_ID, label: t("all") },
       ...leafCategories.map((c) => ({
         id: c.id,
         label: c.name[locale] ?? c.name.vi,
       })),
     ],
-    [leafCategories, locale]
+    [leafCategories, locale, t]
   );
 
   const filteredProducts = useMemo(() => {
@@ -48,7 +49,7 @@ export default function Collections({ products, categories }: CollectionsProps) 
       {/* Header */}
       <div className="mb-16 text-center md:text-left">
         <h2 className="text-5xl md:text-7xl font-black uppercase leading-[0.85] tracking-tighter text-black">
-          CORE COLLECTION
+          {t("title")}
         </h2>
       </div>
 
@@ -77,11 +78,11 @@ export default function Collections({ products, categories }: CollectionsProps) 
         {/* Actions */}
         <div className="flex items-center gap-8">
           <button className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-black hover:opacity-70 transition-opacity">
-            <span>Filter (4)</span>
+            <span>{t("filter", { count: 4 })}</span>
             <SlidersHorizontal size={16} strokeWidth={2} />
           </button>
           <button className="text-sm font-medium text-gray-500 hover:text-black transition-colors">
-            Sort by: <span className="font-semibold text-black">Latest</span>
+            {t("sortBy")} <span className="font-semibold text-black">{t("sortLatest")}</span>
           </button>
         </div>
       </div>
@@ -101,7 +102,7 @@ export default function Collections({ products, categories }: CollectionsProps) 
         </div>
       ) : (
         <div className="py-20 text-center text-sm uppercase tracking-widest text-gray-400">
-          No products in this category yet.
+          {t("empty")}
         </div>
       )}
 
@@ -109,9 +110,9 @@ export default function Collections({ products, categories }: CollectionsProps) 
       <div className="mt-20 flex justify-center">
         <button
           className="group flex flex-col items-center gap-3 text-sm font-semibold uppercase tracking-widest text-gray-400 hover:text-black transition-colors"
-          aria-label="Load more collections"
+          aria-label={t("loadMoreAria")}
         >
-          <span>More</span>
+          <span>{t("more")}</span>
           <ChevronDown
             size={24}
             strokeWidth={1}

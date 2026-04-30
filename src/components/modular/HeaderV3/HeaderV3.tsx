@@ -6,6 +6,7 @@ import { Heart, ShoppingBag, User, Search } from "lucide-react"
 import { useLocale } from "next-intl"
 import type { Category } from "../../../../types"
 import { useCart } from "../../../contexts/CartContext"
+import { MinimalLocaleSwitch } from "../LocaleSwitcher"
 
 interface HeaderV3Props {
   categories?: Category[]
@@ -53,12 +54,6 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
           {/* Desktop Links */}
           <nav className='hidden md:flex items-center gap-8'>
             <Link
-              href='/'
-              className='text-[11px] font-medium uppercase tracking-[0.2em] text-black hover:opacity-60 transition-opacity'
-            >
-              Home
-            </Link>
-            <Link
               href='/collections'
               className='text-[11px] font-medium uppercase tracking-[0.2em] text-black hover:opacity-60 transition-opacity'
             >
@@ -70,6 +65,12 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
             >
               New
             </Link>
+            <MinimalLocaleSwitch
+              className='text-[11px] font-medium uppercase tracking-[0.2em] flex items-center gap-1.5'
+              activeClassName='text-black'
+              inactiveClassName='text-black/40 hover:text-black cursor-pointer'
+              separator=' / '
+            />
           </nav>
         </div>
 
@@ -78,7 +79,7 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
           <Link
             href='/'
             aria-label='Home'
-            className='group'
+            className='group inline-flex items-center justify-center p-3 -m-3 rounded-full hover:bg-black/5 transition-colors'
             onClick={() => setIsMenuOpen(false)}
           >
             <svg

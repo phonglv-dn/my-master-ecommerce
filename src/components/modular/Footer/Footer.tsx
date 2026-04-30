@@ -1,24 +1,27 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import FooterLocaleSwitch from "./FooterLocaleSwitch";
 import FooterWordmark from "./FooterWordmark";
 
-const NAV_LINKS = [
-  { label: "Shop", href: "#" },
-  { label: "About", href: "#" },
-  { label: "Policies", href: "#" },
-  { label: "Socials (Instagram/TikTok)", href: "#" },
-];
+export default async function Footer() {
+  const t = await getTranslations("footer");
 
-export default function Footer() {
+  const navLinks = [
+    { label: t("shop"), href: "#" },
+    { label: t("about"), href: "#" },
+    { label: t("policies"), href: "#" },
+    { label: t("socials"), href: "#" },
+  ];
+
   return (
     <footer className="w-full bg-[#f8f8f8] pt-24 md:pt-32 pb-8 px-6 md:px-12 lg:px-24">
       <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row md:justify-between md:items-end gap-16 md:gap-8">
         {/* Left Column — Navigation */}
         <nav
           className="flex flex-col gap-6 z-10"
-          aria-label="Footer navigation"
+          aria-label={t("navAria")}
         >
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <Link
               key={link.label}
               href={link.href}
@@ -47,7 +50,7 @@ export default function Footer() {
             S
           </span>
           <p className="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 font-medium">
-            © 2026 — SBLVK. All rights reserved.
+            {t("copyright")}
           </p>
         </div>
 
@@ -55,7 +58,7 @@ export default function Footer() {
           href="#"
           className="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 font-medium hover:text-black transition-colors"
         >
-          Privacy
+          {t("privacy")}
         </Link>
       </div>
     </footer>

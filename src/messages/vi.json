@@ -15,13 +15,57 @@
     "delete": "Xóa",
     "edit": "Chỉnh sửa",
     "login": "Đăng nhập",
-    "logout": "Đăng xuất"
+    "logout": "Đăng xuất",
+    "previous": "Trước",
+    "next": "Sau",
+    "language": "Ngôn ngữ",
+    "languageAria": "Chuyển đổi ngôn ngữ"
   },
   "home": {
     "heroTitle": "Mua sắm thông minh,\nGiao hàng nhanh chóng",
     "heroSubtitle": "Khám phá hàng nghìn sản phẩm chất lượng với giá tốt nhất",
     "featuredProducts": "Sản phẩm nổi bật",
     "newArrivals": "Hàng mới về"
+  },
+  "hero": {
+    "titleLine1": "BỘ SƯU TẬP",
+    "titleLine2": "MỚI",
+    "subtitle": "Hè 2024",
+    "shopCta": "ĐẾN CỬA HÀNG",
+    "imageAlt1": "SBLVK kết cấu vải đen",
+    "imageAlt2": "SBLVK người mẫu streetwear toàn đen"
+  },
+  "newThisWeek": {
+    "titleLine1": "Đồng phục",
+    "titleLine2": "Hằng ngày",
+    "seeAll": "Xem tất cả"
+  },
+  "collections": {
+    "title": "BỘ SƯU TẬP CHỦ ĐẠO",
+    "all": "Tất cả",
+    "filter": "Bộ lọc ({count})",
+    "sortBy": "Sắp xếp:",
+    "sortLatest": "Mới nhất",
+    "empty": "Chưa có sản phẩm trong danh mục này.",
+    "more": "Xem thêm",
+    "loadMoreAria": "Tải thêm bộ sưu tập"
+  },
+  "lookbook": {
+    "title": "SBLVK: Vượt ngoài Màu Đen",
+    "description": "Chúng tôi tin rằng màu đen không phải là sự thiếu vắng màu sắc,\nmà là sự tập trung tuyệt đối vào phom dáng và bản sắc.",
+    "imageAlt1": "Tối giản đen - kiến trúc về đêm",
+    "imageAlt2": "Tối giản đen - áo box tee đen",
+    "imageAlt3": "Tối giản đen - phố đêm",
+    "imageAlt4": "Tối giản đen - bóng kiến trúc thô mộc"
+  },
+  "footer": {
+    "navAria": "Điều hướng chân trang",
+    "shop": "Cửa hàng",
+    "about": "Giới thiệu",
+    "policies": "Chính sách",
+    "socials": "Mạng xã hội (Instagram/TikTok)",
+    "copyright": "© 2026 — SBLVK. Mọi quyền được bảo lưu.",
+    "privacy": "Quyền riêng tư"
   },
   "product": {
     "price": "Giá",

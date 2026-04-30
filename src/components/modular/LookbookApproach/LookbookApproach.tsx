@@ -1,18 +1,19 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
-export default function LookbookApproach() {
+export default async function LookbookApproach() {
+  const t = await getTranslations("lookbook");
+
   return (
     <section className="bg-[#f4f4f4] py-24 w-full overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24">
         {/* Title & Description */}
         <div className="flex flex-col items-center mb-24">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-widest uppercase text-center mb-8 text-black">
-            SBLVK: Beyond the Black
+            {t("title")}
           </h2>
-          <p className="text-gray-500 text-center max-w-2xl text-sm leading-[2] tracking-wide">
-            Chúng tôi tin rằng màu đen không phải là sự thiếu vắng màu sắc,
-            <br className="hidden md:block" />
-            mà là sự tập trung tuyệt đối vào phom dáng và bản sắc.
+          <p className="text-gray-500 text-center max-w-2xl text-sm leading-[2] tracking-wide whitespace-pre-line">
+            {t("description")}
           </p>
         </div>
 
@@ -23,7 +24,7 @@ export default function LookbookApproach() {
             <div className="relative aspect-[3/4] w-full group overflow-hidden">
               <Image
                 src="https://images.unsplash.com/photo-1519659528534-7fd733a832a0?w=800&q=80"
-                alt="Dark minimalist - architectural night"
+                alt={t("imageAlt1")}
                 fill
                 className="object-cover grayscale transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 25vw"
@@ -36,7 +37,7 @@ export default function LookbookApproach() {
             <div className="relative aspect-[3/4] w-full group overflow-hidden">
               <Image
                 src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80"
-                alt="Dark minimalist - black box tee"
+                alt={t("imageAlt2")}
                 fill
                 className="object-cover grayscale transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 25vw"
@@ -50,7 +51,7 @@ export default function LookbookApproach() {
               <div className="relative w-full h-full overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80"
-                  alt="Dark minimalist - night street"
+                  alt={t("imageAlt3")}
                   fill
                   className="object-cover grayscale transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 25vw"
@@ -64,7 +65,7 @@ export default function LookbookApproach() {
             <div className="relative aspect-[3/4] w-full group overflow-hidden">
               <Image
                 src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80"
-                alt="Dark minimalist - brutalist silhouette"
+                alt={t("imageAlt4")}
                 fill
                 className="object-cover grayscale transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 25vw"

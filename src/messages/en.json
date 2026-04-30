@@ -15,13 +15,57 @@
     "delete": "Delete",
     "edit": "Edit",
     "login": "Login",
-    "logout": "Logout"
+    "logout": "Logout",
+    "previous": "Previous",
+    "next": "Next",
+    "language": "Language",
+    "languageAria": "Language switcher"
   },
   "home": {
     "heroTitle": "Shop Smart,\nDeliver Fast",
     "heroSubtitle": "Discover thousands of quality products at the best prices",
     "featuredProducts": "Featured Products",
     "newArrivals": "New Arrivals"
+  },
+  "hero": {
+    "titleLine1": "NEW",
+    "titleLine2": "COLLECTION",
+    "subtitle": "Summer 2024",
+    "shopCta": "GO TO SHOP",
+    "imageAlt1": "SBLVK black fabric texture",
+    "imageAlt2": "SBLVK all-black streetwear model"
+  },
+  "newThisWeek": {
+    "titleLine1": "The Daily",
+    "titleLine2": "Uniform",
+    "seeAll": "See All"
+  },
+  "collections": {
+    "title": "CORE COLLECTION",
+    "all": "All",
+    "filter": "Filter ({count})",
+    "sortBy": "Sort by:",
+    "sortLatest": "Latest",
+    "empty": "No products in this category yet.",
+    "more": "More",
+    "loadMoreAria": "Load more collections"
+  },
+  "lookbook": {
+    "title": "SBLVK: Beyond the Black",
+    "description": "We believe black is not the absence of color,\nbut absolute focus on form and identity.",
+    "imageAlt1": "Dark minimalist - architectural night",
+    "imageAlt2": "Dark minimalist - black box tee",
+    "imageAlt3": "Dark minimalist - night street",
+    "imageAlt4": "Dark minimalist - brutalist silhouette"
+  },
+  "footer": {
+    "navAria": "Footer navigation",
+    "shop": "Shop",
+    "about": "About",
+    "policies": "Policies",
+    "socials": "Socials (Instagram/TikTok)",
+    "copyright": "© 2026 — SBLVK. All rights reserved.",
+    "privacy": "Privacy"
   },
   "product": {
     "price": "Price",
