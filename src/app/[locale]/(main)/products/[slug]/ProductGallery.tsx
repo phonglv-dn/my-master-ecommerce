@@ -205,7 +205,7 @@ export default function ProductGallery({
           role="dialog"
           aria-modal="true"
           aria-label={alt}
-          className="fixed inset-0 z-70 flex items-center justify-center bg-black/95 p-4 sm:p-10"
+          className="fixed inset-0 z-70 flex items-center justify-center bg-black/95 p-6 sm:p-12"
           onClick={() => setLightboxOpen(false)}
         >
           <button
@@ -215,7 +215,7 @@ export default function ProductGallery({
               setLightboxOpen(false);
             }}
             aria-label={t("close")}
-            className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center text-white/80 transition hover:text-white"
+            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition hover:bg-white/20"
           >
             <X size={22} />
           </button>
@@ -235,7 +235,7 @@ export default function ProductGallery({
           )}
 
           <div
-            className="relative h-full max-h-[90vh] w-full max-w-5xl"
+            className="relative h-full max-h-[78vh] w-full max-w-3xl"
             onClick={(e) => e.stopPropagation()}
           >
             <Image

@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { Heart, ShoppingBag, User, Search } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 import type { Category } from "../../../../types"
@@ -19,9 +18,6 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
   const tc = useTranslations("common")
   const th = useTranslations("header")
   const { totalItems } = useCart()
-  const pathname = usePathname()
-  // PDP renders its own floating mobile top bar — hide global header on mobile only.
-  const isProductDetail = /\/products\/[^/]+\/?$/.test(pathname ?? "")
 
   // Prevent scrolling when menu is open
   useEffect(() => {
@@ -38,9 +34,7 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
   return (
     <>
       <header
-        className={`sticky top-0 z-[60] w-full bg-white/80 backdrop-blur-md px-5 md:px-8 lg:px-12 py-6 ${
-          isProductDetail ? "hidden md:flex" : "flex"
-        } items-center justify-between transition-colors duration-300`}
+        className='sticky top-0 z-[60] w-full bg-white/80 backdrop-blur-md px-5 md:px-8 lg:px-12 py-6 flex items-center justify-between transition-colors duration-300'
       >
         {/* Left: Navigation */}
         <div className='flex-1 flex items-center gap-6 md:gap-8'>

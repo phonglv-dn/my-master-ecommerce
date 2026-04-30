@@ -1,10 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
-import { ArrowLeft, ShoppingBag, User } from "lucide-react";
 import { useCurrency } from "../../../../../contexts/CurrencyContext";
 import { formatPrice } from "../../../../../../lib/formatPrice";
 import { getLocalizedText } from "../../../../../../lib/getLocalizedText";
@@ -23,9 +20,8 @@ export default function ProductDetailClient({
   const t = useTranslations("product");
   const tc = useTranslations("common");
   const locale = useLocale() as Locale;
-  const router = useRouter();
   const { currency } = useCurrency();
-  const { addToCart, totalItems } = useCart();
+  const { addToCart } = useCart();
 
   const localizedTitle = getLocalizedText(product.title, locale);
   const localizedDesc = getLocalizedText(product.description, locale);
@@ -47,40 +43,6 @@ export default function ProductDetailClient({
 
   return (
     <>
-      {/* ── Mobile floating top nav (hidden on md+) ── */}
-      <div className="fixed left-0 right-0 top-0 z-40 flex items-center justify-between px-4 py-3 backdrop-blur-md bg-white/40 md:hidden">
-        <button
-          type="button"
-          onClick={() => router.back()}
-          aria-label={t("back")}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-black shadow-sm transition hover:bg-gray-100"
-        >
-          <ArrowLeft size={18} strokeWidth={1.75} />
-        </button>
-
-        <div className="flex items-center gap-2">
-          <Link
-            href={`/${locale}/cart`}
-            aria-label={tc("cart")}
-            className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white text-black shadow-sm transition hover:bg-gray-100"
-          >
-            <ShoppingBag size={16} strokeWidth={1.75} />
-            {totalItems > 0 && (
-              <span className="absolute -right-1 -top-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold text-white ring-2 ring-white">
-                {totalItems > 99 ? "99+" : totalItems}
-              </span>
-            )}
-          </Link>
-          <Link
-            href={`/${locale}/account`}
-            aria-label={tc("account")}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-black shadow-sm transition hover:bg-gray-100"
-          >
-            <User size={16} strokeWidth={1.75} />
-          </Link>
-        </div>
-      </div>
-
       <div className="mx-auto flex max-w-7xl flex-col items-start justify-center gap-6 px-0 pb-24 md:flex-row md:gap-12 md:px-4 md:py-12 md:pb-20 lg:py-20">
         <ProductGallery
           images={images}
