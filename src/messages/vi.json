@@ -19,13 +19,20 @@
     "previous": "Trước",
     "next": "Sau",
     "language": "Ngôn ngữ",
-    "languageAria": "Chuyển đổi ngôn ngữ"
+    "languageAria": "Chuyển đổi ngôn ngữ",
+    "wishlist": "Yêu thích"
   },
   "home": {
     "heroTitle": "Mua sắm thông minh,\nGiao hàng nhanh chóng",
     "heroSubtitle": "Khám phá hàng nghìn sản phẩm chất lượng với giá tốt nhất",
     "featuredProducts": "Sản phẩm nổi bật",
     "newArrivals": "Hàng mới về"
+  },
+  "header": {
+    "menu": "Menu",
+    "collections": "Bộ sưu tập",
+    "new": "Mới",
+    "searchPlaceholder": "Tìm sản phẩm..."
   },
   "hero": {
     "titleLine1": "BỘ SƯU TẬP",

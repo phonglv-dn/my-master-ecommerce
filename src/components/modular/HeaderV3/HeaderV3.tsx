@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { Heart, ShoppingBag, User, Search } from "lucide-react"
-import { useLocale } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import type { Category } from "../../../../types"
 import { useCart } from "../../../contexts/CartContext"
 import { MinimalLocaleSwitch } from "../LocaleSwitcher"
@@ -15,6 +15,8 @@ interface HeaderV3Props {
 export default function HeaderV3({ categories = [] }: HeaderV3Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const locale = useLocale() as "vi" | "en"
+  const tc = useTranslations("common")
+  const th = useTranslations("header")
   const { totalItems } = useCart()
 
   // Prevent scrolling when menu is open
@@ -37,7 +39,7 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
           {/* Hamburger Icon */}
           <button
             className='flex flex-col gap-[5px] justify-center w-6 h-6 group cursor-pointer relative z-[60]'
-            aria-label='Menu'
+            aria-label={th("menu")}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <span
@@ -57,13 +59,13 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
               href='/collections'
               className='text-[11px] font-medium uppercase tracking-[0.2em] text-black hover:opacity-60 transition-opacity'
             >
-              Collections
+              {th("collections")}
             </Link>
             <Link
               href='/new'
               className='text-[11px] font-medium uppercase tracking-[0.2em] text-black hover:opacity-60 transition-opacity'
             >
-              New
+              {th("new")}
             </Link>
             <MinimalLocaleSwitch
               className='text-[11px] font-medium uppercase tracking-[0.2em] flex items-center gap-1.5'
@@ -78,7 +80,7 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
         <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center z-[60]'>
           <Link
             href='/'
-            aria-label='Home'
+            aria-label={tc("home")}
             className='group inline-flex items-center justify-center p-3 -m-3 rounded-full hover:bg-black/5 transition-colors'
             onClick={() => setIsMenuOpen(false)}
           >
@@ -102,7 +104,7 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
           <Link
             href={`/${locale}/wishlist`}
             className='hidden md:flex items-center justify-center w-[40px] h-[40px] rounded-full bg-[#1A1A1A] text-white hover:bg-black transition-colors'
-            aria-label='Wishlist'
+            aria-label={tc("wishlist")}
           >
             <Heart size={16} strokeWidth={1.5} />
           </Link>
@@ -111,10 +113,10 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
           <Link
             href={`/${locale}/cart`}
             className='flex items-center bg-[#1A1A1A] rounded-full p-1 md:py-1.5 md:pl-5 hover:bg-black transition-all duration-300'
-            aria-label='Cart'
+            aria-label={tc("cart")}
           >
-            <span className='hidden md:inline text-[10px] tracking-[0.2em] font-medium text-white mr-4'>
-              CART
+            <span className='hidden md:inline text-[10px] tracking-[0.2em] font-medium text-white mr-4 uppercase'>
+              {tc("cart")}
             </span>
             <div className='relative w-[32px] h-[32px] md:w-[30px] md:h-[30px] rounded-full bg-white text-black flex items-center justify-center'>
               <ShoppingBag size={14} strokeWidth={1.5} />
@@ -130,7 +132,7 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
           <Link
             href={`/${locale}/account`}
             className='flex items-center justify-center w-[40px] h-[40px] rounded-full bg-[#1A1A1A] text-white hover:bg-black transition-colors'
-            aria-label='User Account'
+            aria-label={tc("account")}
           >
             <User size={16} strokeWidth={1.5} />
           </Link>
@@ -153,7 +155,7 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
             <Search className='w-6 h-6 text-black/50 mr-4' strokeWidth={1.5} />
             <input
               type='text'
-              placeholder='Search for products...'
+              placeholder={th("searchPlaceholder")}
               className='bg-transparent border-none outline-none text-xl md:text-3xl w-full text-black placeholder-black/30'
             />
           </div>
@@ -192,6 +194,50 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
                   </Link>
                 ))}
           </nav>
+
+          {/* Mobile utility section — surfaces only what's missing from the mobile top bar */}
+          <div
+            className={`md:hidden border-t border-black/10 pt-8 flex flex-col gap-8 transition-all duration-700 ${
+              isMenuOpen
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4"
+            }`}
+            style={{ transitionDelay: "500ms" }}
+          >
+            <div className='flex flex-col gap-5'>
+              <Link
+                href='/collections'
+                onClick={() => setIsMenuOpen(false)}
+                className='text-sm uppercase tracking-[0.25em] text-black/70 hover:text-black transition-colors w-fit'
+              >
+                {th("collections")}
+              </Link>
+              <Link
+                href='/new'
+                onClick={() => setIsMenuOpen(false)}
+                className='text-sm uppercase tracking-[0.25em] text-black/70 hover:text-black transition-colors w-fit'
+              >
+                {th("new")}
+              </Link>
+              <Link
+                href={`/${locale}/wishlist`}
+                onClick={() => setIsMenuOpen(false)}
+                className='inline-flex items-center gap-3 text-sm uppercase tracking-[0.25em] text-black/70 hover:text-black transition-colors w-fit'
+              >
+                <Heart size={14} strokeWidth={1.5} />
+                {tc("wishlist")}
+              </Link>
+            </div>
+
+            <div className='pt-2'>
+              <MinimalLocaleSwitch
+                className='text-xs uppercase tracking-[0.25em] flex items-center gap-2'
+                activeClassName='text-black font-semibold'
+                inactiveClassName='text-black/40 hover:text-black cursor-pointer'
+                separator=' / '
+              />
+            </div>
+          </div>
         </div>
       </div>
     </>

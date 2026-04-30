@@ -19,13 +19,20 @@
     "previous": "Previous",
     "next": "Next",
     "language": "Language",
-    "languageAria": "Language switcher"
+    "languageAria": "Language switcher",
+    "wishlist": "Wishlist"
   },
   "home": {
     "heroTitle": "Shop Smart,\nDeliver Fast",
     "heroSubtitle": "Discover thousands of quality products at the best prices",
     "featuredProducts": "Featured Products",
     "newArrivals": "New Arrivals"
+  },
+  "header": {
+    "menu": "Menu",
+    "collections": "Collections",
+    "new": "New",
+    "searchPlaceholder": "Search for products..."
   },
   "hero": {
     "titleLine1": "NEW",
