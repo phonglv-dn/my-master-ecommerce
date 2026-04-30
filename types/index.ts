@@ -21,6 +21,7 @@ export interface Category {
   slug: string;
   /** Localized category name. */
   name: LocalizedString;
+  parent_id: string | null;
   created_at: string;
 }
 
@@ -40,10 +41,24 @@ export interface Product {
   stock: number;
   /** Foreign key to categories table. */
   category_id: string | null;
+  /** Color code for specific shades (e.g. Matte Black) */
+  color_code?: string | null;
   created_at: string;
   updated_at: string;
   /** Populated when joined with categories. */
   category?: Category;
+}
+
+export interface HeroBanner {
+  id: string;
+  title: string;
+  image_1_url: string | null;
+  image_1_link: string | null;
+  image_2_url: string | null;
+  image_2_link: string | null;
+  cta_initial: string;
+  created_at: string;
+  updated_at: string;
 }
 
 // ── API / UI helpers ────────────────────────────────────────────────────────
