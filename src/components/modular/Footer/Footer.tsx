@@ -1,46 +1,62 @@
 import Link from "next/link";
+import FooterLocaleSwitch from "./FooterLocaleSwitch";
+import FooterWordmark from "./FooterWordmark";
+
+const NAV_LINKS = [
+  { label: "Shop", href: "#" },
+  { label: "About", href: "#" },
+  { label: "Policies", href: "#" },
+  { label: "Socials (Instagram/TikTok)", href: "#" },
+];
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#f4f4f4] pt-24 md:pt-32 pb-8 px-6 md:px-12 lg:px-24">
-      <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-end relative min-h-[350px]">
-        
-        {/* Left Column - Links */}
-        <div className="flex flex-col space-y-4 mb-16 md:mb-0 z-10">
-          <Link href="#" className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition">
-            Info
-          </Link>
-          <Link href="#" className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition">
-            Management
-          </Link>
-          <Link href="#" className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition">
-            Contacts
-          </Link>
-          <Link href="#" className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition pt-6">
-            Language (Eng/Esp)
-          </Link>
-        </div>
+    <footer className="w-full bg-[#f8f8f8] pt-24 md:pt-32 pb-8 px-6 md:px-12 lg:px-24">
+      <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row md:justify-between md:items-end gap-16 md:gap-8">
+        {/* Left Column — Navigation */}
+        <nav
+          className="flex flex-col gap-6 z-10"
+          aria-label="Footer navigation"
+        >
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="text-xs uppercase tracking-widest text-gray-600 font-medium hover:text-black transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
 
-        {/* Center - Huge Logo */}
-        <div className="md:absolute md:left-1/2 md:bottom-0 md:-translate-x-1/2 flex justify-center w-full md:w-auto z-0 mb-16 md:mb-0">
-          <div className="flex items-start">
-            {/* Triangle pointing right */}
-            <div className="w-0 h-0 border-t-[15px] border-t-transparent border-l-[25px] border-l-black border-b-[15px] border-b-transparent md:border-t-[25px] md:border-l-[40px] md:border-b-[25px] mt-6 md:mt-10 mr-4 md:mr-8 shrink-0"></div>
-            
-            {/* XIV QR text */}
-            <div className="flex flex-col text-8xl md:text-[10rem] lg:text-[14rem] font-black leading-[0.75] tracking-tighter text-black">
-              <span>XIV</span>
-              <span>QR</span>
-            </div>
+          <div className="mt-6">
+            <FooterLocaleSwitch />
           </div>
-        </div>
+        </nav>
 
+        {/* Right — Huge SBLVK wordmark (outline → ink fill on scroll-in) */}
+        <FooterWordmark />
       </div>
 
-      {/* Bottom row - Copyright & Privacy */}
-      <div className="max-w-[1400px] mx-auto mt-24 md:mt-32 flex justify-between items-center text-[9px] md:text-[10px] text-gray-400 font-light tracking-wider uppercase border-t border-gray-200 pt-8">
-        <p>© 2024 — copyright</p>
-        <p>privacy</p>
+      {/* Bottom Bar */}
+      <div className="max-w-[1400px] mx-auto mt-20 md:mt-28 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 border-t border-gray-200 pt-8">
+        <div className="flex items-center gap-3">
+          <span
+            className="w-8 h-8 rounded-full bg-black flex items-center justify-center text-white text-[11px] font-bold"
+            aria-hidden
+          >
+            S
+          </span>
+          <p className="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 font-medium">
+            © 2026 — SBLVK. All rights reserved.
+          </p>
+        </div>
+
+        <Link
+          href="#"
+          className="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 font-medium hover:text-black transition-colors"
+        >
+          Privacy
+        </Link>
       </div>
     </footer>
   );

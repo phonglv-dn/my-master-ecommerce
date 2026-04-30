@@ -18,10 +18,10 @@ export default function NewThisWeek({ products }: NewThisWeekProps) {
       {/* Header Area */}
       <div className="mb-12 flex items-end justify-between">
         <h2 className="flex flex-col text-5xl md:text-7xl font-black uppercase leading-[0.85] tracking-tighter text-black">
-          <span>New</span>
+          <span>The Daily</span>
           <span className="flex items-start">
-            This Week
-            <sup className="ml-2 mt-1 text-base md:text-xl font-bold text-blue-900 tracking-normal">(50)</sup>
+            Uniform
+            <sup className="ml-2 mt-1 text-base md:text-xl font-bold text-black/60 tracking-normal">(50)</sup>
           </span>
         </h2>
         

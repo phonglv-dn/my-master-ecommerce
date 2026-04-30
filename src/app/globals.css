@@ -1,20 +1,13 @@
 @import "tailwindcss";
 
-/* ── Brand tokens (synced with SHOP_CONFIG) ─────────────────────────── */
+/* ── Brand tokens (synced with SHOP_CONFIG — SBLVK) ─────────────────── */
 :root {
-  --color-primary:   #6366f1;
-  --color-secondary: #f59e0b;
-  --radius-brand:    0.75rem;
+  --color-primary:   #000000;
+  --color-secondary: #f8f8f8;
+  --radius-brand:    0rem;
 
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #f8f8f8;
+  --foreground: #000000;
 }
 
 /* ── Base ───────────────────────────────────────────────────────────── */
@@ -30,18 +23,43 @@ body {
   font-family: var(--font-inter, "Inter", "Helvetica Neue", Arial, sans-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* ── Scrollbar (subtle) ─────────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
+/* ── Scrollbar — SBLVK: thin, hard-edge, monochrome ─────────────────── */
+::-webkit-scrollbar         { width: 6px; height: 6px; }
+::-webkit-scrollbar-track   { background: transparent; }
+::-webkit-scrollbar-thumb   { background: var(--color-primary); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: #333; }
+
+/* Firefox */
+html { scrollbar-width: thin; scrollbar-color: var(--color-primary) transparent; }
+
+/* ── Footer SBLVK wordmark — outline → ink fill on viewport entry ───── */
+.sblvk-wordmark {
+  color: transparent;
+  -webkit-text-stroke: 0.018em #000;
+  background-image: linear-gradient(to right, #000, #000);
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 0% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  letter-spacing: 0;
+  transition:
+    background-size 1.6s cubic-bezier(0.7, 0, 0.2, 1),
+    letter-spacing 1.6s cubic-bezier(0.7, 0, 0.2, 1);
 }
-::-webkit-scrollbar-track {
-  background: transparent;
+.sblvk-wordmark.is-visible {
+  background-size: 100% 100%;
+  letter-spacing: -0.05em;
 }
-::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
-  border-radius: 9999px;
+@media (prefers-reduced-motion: reduce) {
+  .sblvk-wordmark {
+    background-size: 100% 100%;
+    letter-spacing: -0.05em;
+    transition: none;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

@@ -7,14 +7,17 @@ import ProductCardV2 from "../../../components/modular/ProductCardV2/ProductCard
 import NewThisWeek from "../../../components/modular/NewThisWeek/NewThisWeek"
 import Collections from "../../../components/modular/Collections/Collections"
 import { LookbookApproach } from "../../../components/modular/LookbookApproach"
-import { getProducts } from "../../../../lib/supabase"
+import { getProducts, getCategories } from "../../../../lib/supabase"
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 export default async function HomePage() {
   const t = await getTranslations("home")
   const tc = await getTranslations("common")
 
-  const products = await getProducts({ limit: 12 })
+  const [products, categories] = await Promise.all([
+    getProducts({ limit: 12, withCategory: true }),
+    getCategories(),
+  ])
 
   const activeHero = SHOP_CONFIG.layout.heroVariant
   const activeCard = SHOP_CONFIG.layout.cardVariant
@@ -57,7 +60,7 @@ export default async function HomePage() {
       <NewThisWeek products={products} />
 
       {/* ── Collections ────────────────────────────────────────────────────── */}
-      <Collections products={products} />
+      <Collections products={products} categories={categories} />
 
       {/* ── Lookbook Approach ──────────────────────────────────────────────── */}
       <LookbookApproach />

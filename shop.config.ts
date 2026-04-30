@@ -1,13 +1,14 @@
 export const SHOP_CONFIG = {
   brand: {
-    name: "MasterShop",
+    name: "SBLVK",
     logoUrl: "/images/logo.svg",
   },
 
   theme: {
-    primaryColor: "#6366f1",   // indigo-500
-    secondaryColor: "#f59e0b", // amber-400
-    borderRadius: "0.75rem",   // 12px
+    primaryColor: "#000000",   // black — SBLVK signature
+    secondaryColor: "#f8f8f8", // off-white background
+    backgroundColor: "#f8f8f8",// page background — soft warm gray
+    borderRadius: "0rem",      // sharp edges for minimalist style
     fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif",
   },
 
