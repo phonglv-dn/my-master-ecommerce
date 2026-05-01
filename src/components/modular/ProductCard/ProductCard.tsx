@@ -3,9 +3,7 @@
 import { useLocale } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import { Plus, Check } from "lucide-react";
 import { useCurrency } from "../../../contexts/CurrencyContext";
-import { useCart } from "../../../contexts/CartContext";
 import { formatPrice } from "../../../../lib/formatPrice";
 import type { Product } from "../../../../types";
 import type { Locale } from "../../../../shop.config";
@@ -28,10 +26,7 @@ export default function ProductCard({
 }: ProductCardProps) {
   const locale = useLocale() as Locale;
   const { currency } = useCurrency();
-  const { items, addToCart, removeFromCart } = useCart();
   const [imgError, setImgError] = useState(false);
-
-  const isInCart = items.some((item) => item.product?.id === product.id);
 
   const localizedTitle = product.title[locale] ?? product.title.vi;
   const priceDisplay = formatPrice(product.price_vnd, currency, locale);
@@ -64,33 +59,6 @@ export default function ProductCard({
             </div>
           )}
         </Link>
-
-        {/* Add / Remove CTA — thin square, black border, inverts on hover */}
-        {isInCart ? (
-          <button
-            className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center border border-black bg-black text-white transition-colors duration-200"
-            aria-label="Remove from cart"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              removeFromCart(product.id);
-            }}
-          >
-            <Check size={14} strokeWidth={1.75} />
-          </button>
-        ) : (
-          <button
-            className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center border border-black bg-white text-black opacity-0 translate-y-1 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:translate-y-0 hover:bg-black hover:text-white"
-            aria-label="Add to cart"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              addToCart(product, 1);
-            }}
-          >
-            <Plus size={14} strokeWidth={1.75} />
-          </button>
-        )}
 
         {showSwatches && (
           <div className="absolute bottom-3 left-3 flex items-center gap-1">

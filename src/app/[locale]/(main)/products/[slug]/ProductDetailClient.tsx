@@ -33,12 +33,23 @@ export default function ProductDetailClient({
 
   const sizes = product.sizes ?? [];
   const images = product.images ?? [];
+  const swatchHex = product.swatch_hex ?? "#000000";
+  const sizeRequired = sizes.length > 0;
 
   const [activeSize, setActiveSize] = useState<string | null>(null);
+  const [sizeError, setSizeError] = useState(false);
 
   const handleAddToCart = () => {
     if (isOutOfStock) return;
-    addToCart(product, 1);
+    if (sizeRequired && !activeSize) {
+      setSizeError(true);
+      return;
+    }
+    addToCart(product, {
+      size: activeSize ?? "OS",
+      color: swatchHex,
+      quantity: 1,
+    });
   };
 
   return (
@@ -84,7 +95,11 @@ export default function ProductDetailClient({
           {/* Size selector — optional */}
           {sizes.length > 0 && (
             <div>
-              <p className="mb-3 text-xs uppercase tracking-[0.18em] text-gray-700">
+              <p
+                className={`mb-3 text-xs uppercase tracking-[0.18em] transition-colors ${
+                  sizeError ? "text-red-600" : "text-gray-700"
+                }`}
+              >
                 {t("size")}
               </p>
               <div className="flex flex-wrap gap-2">
@@ -94,12 +109,17 @@ export default function ProductDetailClient({
                     <button
                       key={s}
                       type="button"
-                      onClick={() => setActiveSize(s)}
+                      onClick={() => {
+                        setActiveSize(s);
+                        setSizeError(false);
+                      }}
                       aria-pressed={isActive}
                       className={`h-9 min-w-[44px] border px-3 text-xs font-medium uppercase tracking-wider transition ${
                         isActive
                           ? "border-black bg-black text-white"
-                          : "border-gray-400/70 bg-transparent text-gray-800 hover:border-black"
+                          : sizeError
+                            ? "border-red-500 bg-transparent text-gray-800 hover:border-black"
+                            : "border-gray-400/70 bg-transparent text-gray-800 hover:border-black"
                       }`}
                     >
                       {s}

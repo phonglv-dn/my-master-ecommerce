@@ -1,12 +1,11 @@
 "use client";
 
 import { useTranslations, useLocale } from "next-intl";
-import { ShoppingCart, Package, ArrowRight } from "lucide-react";
+import { Package, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useCurrency } from "../../../contexts/CurrencyContext";
-import { useCart } from "../../../contexts/CartContext";
 import { formatPrice } from "../../../../lib/formatPrice";
 import type { Product } from "../../../../types";
 import type { Locale } from "../../../../shop.config";
@@ -17,18 +16,13 @@ import type { Locale } from "../../../../shop.config";
 
 interface ProductCardV2Props {
   product: Product;
-  onAddToCart?: (product: Product) => void;
 }
 
-export default function ProductCardV2({
-  product,
-  onAddToCart,
-}: ProductCardV2Props) {
+export default function ProductCardV2({ product }: ProductCardV2Props) {
   const t = useTranslations("product");
   const tc = useTranslations("common");
   const locale = useLocale() as Locale;
   const { currency } = useCurrency();
-  const { addToCart } = useCart();
 
   // Localized title: product.title is LocalizedString { vi, en }
   const localizedTitle = product.title[locale] ?? product.title.vi;
@@ -110,20 +104,6 @@ export default function ProductCardV2({
           </div>
 
           <div className="product-card-v2__actions">
-            <button
-              id={`add-to-cart-v2-${product.id}`}
-              className="product-card-v2__cta"
-              disabled={isOutOfStock}
-              onClick={() => {
-                addToCart(product, 1);
-                onAddToCart?.(product);
-              }}
-              aria-label={`${tc("addToCart")} – ${localizedTitle}`}
-            >
-              <ShoppingCart size={15} aria-hidden="true" />
-              {tc("addToCart")}
-            </button>
-
             <Link
               href={`/${locale}/products/${product.slug}`}
               className="product-card-v2__detail-link"

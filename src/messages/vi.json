@@ -112,7 +112,23 @@
     "total": "Tổng cộng",
     "checkout": "Thanh toán",
     "continueShopping": "Tiếp tục mua sắm",
-    "remove": "Xóa"
+    "remove": "Xóa",
+    "shoppingBag": "GIỎ HÀNG",
+    "favourites": "YÊU THÍCH",
+    "orderSummary": "TÓM TẮT ĐƠN HÀNG",
+    "subtotal": "Tạm tính",
+    "shipping": "Vận chuyển",
+    "totalTaxIncl": "TỔNG",
+    "taxIncl": "(ĐÃ BAO GỒM THUẾ)",
+    "agreeTerms": "Tôi đồng ý với Điều khoản và Điều kiện",
+    "goToCheckout": "ĐẾN THANH TOÁN",
+    "decreaseQty": "Giảm số lượng",
+    "increaseQty": "Tăng số lượng"
+  },
+  "notFound": {
+    "title": "Không tìm thấy trang",
+    "description": "Trang bạn đang tìm không tồn tại hoặc đã được di chuyển.",
+    "backToShop": "VỀ CỬA HÀNG"
   },
   "currency": {
     "VND": "₫",

@@ -1,12 +1,11 @@
 "use client";
 
 import { useTranslations, useLocale } from "next-intl";
-import { ShoppingCart, Star, Package } from "lucide-react";
+import { Star, Package } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useCurrency } from "../../../contexts/CurrencyContext";
-import { useCart } from "../../../contexts/CartContext";
 import { formatPrice } from "../../../../lib/formatPrice";
 import type { Product } from "../../../../types";
 import type { Locale } from "../../../../shop.config";
@@ -17,18 +16,12 @@ import type { Locale } from "../../../../shop.config";
 
 interface ProductCardV1Props {
   product: Product;
-  onAddToCart?: (product: Product) => void;
 }
 
-export default function ProductCardV1({
-  product,
-  onAddToCart,
-}: ProductCardV1Props) {
+export default function ProductCardV1({ product }: ProductCardV1Props) {
   const t = useTranslations("product");
-  const tc = useTranslations("common");
   const locale = useLocale() as Locale;
   const { currency } = useCurrency();
-  const { addToCart } = useCart();
 
   // Localized title: product.title is LocalizedString { vi, en }
   const localizedTitle = product.title[locale] ?? product.title.vi;
@@ -107,20 +100,6 @@ export default function ProductCardV1({
           {isOutOfStock ? t("outOfStock") : t("inStock")}
         </p>
 
-        {/* Add to cart */}
-        <button
-          id={`add-to-cart-v1-${product.id}`}
-          className="product-card-v1__cta"
-          disabled={isOutOfStock}
-          onClick={() => {
-            addToCart(product, 1);
-            onAddToCart?.(product);
-          }}
-          aria-label={`${tc("addToCart")} – ${localizedTitle}`}
-        >
-          <ShoppingCart size={16} aria-hidden="true" />
-          {tc("addToCart")}
-        </button>
       </div>
     </article>
   );

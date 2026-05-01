@@ -112,7 +112,23 @@
     "total": "Total",
     "checkout": "Checkout",
     "continueShopping": "Continue Shopping",
-    "remove": "Remove"
+    "remove": "Remove",
+    "shoppingBag": "SHOPPING BAG",
+    "favourites": "FAVOURITES",
+    "orderSummary": "ORDER SUMMARY",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "totalTaxIncl": "TOTAL",
+    "taxIncl": "(TAX INCL.)",
+    "agreeTerms": "I agree to the Terms and Conditions",
+    "goToCheckout": "GO TO CHECKOUT",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "backToShop": "BACK TO SHOP"
   },
   "currency": {
     "VND": "₫",
