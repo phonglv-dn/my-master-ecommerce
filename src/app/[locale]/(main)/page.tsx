@@ -28,7 +28,7 @@ export default async function HomePage() {
   const activeHero = SHOP_CONFIG.layout.heroVariant
 
   return (
-    <main className='min-h-screen bg-white dark:bg-gray-950'>
+    <main className='min-h-screen bg-white'>
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       {activeHero === "v3" ? (
         <HeroV3 content={heroContent} />

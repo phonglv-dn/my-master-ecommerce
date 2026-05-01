@@ -51,31 +51,31 @@ export default function ProductDetailClient({
         />
 
         {/* ── Info Card ── */}
-        <div className="flex w-full shrink-0 flex-col gap-6 border border-gray-200 bg-transparent p-6 font-sans md:p-8 lg:w-[400px] dark:border-gray-800">
+        <div className="flex w-full shrink-0 flex-col gap-6 border border-gray-200 bg-transparent p-6 font-sans md:p-8 lg:w-[400px]">
           {localizedCategory && (
-            <span className="text-[11px] uppercase tracking-[0.2em] text-gray-700 dark:text-gray-400">
+            <span className="text-[11px] uppercase tracking-[0.2em] text-gray-700">
               {localizedCategory}
             </span>
           )}
 
           <div className="flex flex-col gap-1">
-            <h1 className="mb-0 font-sans text-2xl font-semibold uppercase tracking-tight text-gray-900 dark:text-white">
+            <h1 className="mb-0 font-sans text-2xl font-semibold uppercase tracking-tight text-gray-900">
               {localizedTitle}
             </h1>
-            <p className="font-sans text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+            <p className="font-sans text-2xl font-semibold tracking-tight text-gray-900">
               {priceDisplay}
             </p>
           </div>
 
-          <p className="mt-2 text-sm normal-case leading-relaxed text-gray-800 dark:text-gray-200">
+          <p className="mt-2 text-sm normal-case leading-relaxed text-gray-800">
             {localizedDesc}
           </p>
 
           {/* Color — read-only metadata */}
           {product.color_code && (
-            <p className="text-xs uppercase tracking-[0.18em] text-gray-700 dark:text-gray-400">
+            <p className="text-xs uppercase tracking-[0.18em] text-gray-700">
               {t("color")}:{" "}
-              <span className="text-gray-900 dark:text-white">
+              <span className="text-gray-900">
                 {product.color_code}
               </span>
             </p>
@@ -84,7 +84,7 @@ export default function ProductDetailClient({
           {/* Size selector — optional */}
           {sizes.length > 0 && (
             <div>
-              <p className="mb-3 text-xs uppercase tracking-[0.18em] text-gray-700 dark:text-gray-400">
+              <p className="mb-3 text-xs uppercase tracking-[0.18em] text-gray-700">
                 {t("size")}
               </p>
               <div className="flex flex-wrap gap-2">
@@ -98,8 +98,8 @@ export default function ProductDetailClient({
                       aria-pressed={isActive}
                       className={`h-9 min-w-[44px] border px-3 text-xs font-medium uppercase tracking-wider transition ${
                         isActive
-                          ? "border-black bg-black text-white dark:border-white dark:bg-white dark:text-black"
-                          : "border-gray-400/70 bg-transparent text-gray-800 hover:border-black dark:border-gray-600 dark:text-gray-200 dark:hover:border-white"
+                          ? "border-black bg-black text-white"
+                          : "border-gray-400/70 bg-transparent text-gray-800 hover:border-black"
                       }`}
                     >
                       {s}
@@ -109,11 +109,11 @@ export default function ProductDetailClient({
               </div>
 
               <div className="mt-3 flex gap-4 text-[10px] uppercase tracking-widest text-gray-500">
-                <button type="button" className="hover:text-black dark:hover:text-white">
+                <button type="button" className="hover:text-black">
                   {t("findYourSize")}
                 </button>
                 <span>|</span>
-                <button type="button" className="hover:text-black dark:hover:text-white">
+                <button type="button" className="hover:text-black">
                   {t("measurementGuide")}
                 </button>
               </div>
@@ -125,7 +125,7 @@ export default function ProductDetailClient({
             type="button"
             onClick={handleAddToCart}
             disabled={isOutOfStock}
-            className="mt-2 hidden w-full items-center justify-center bg-black py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:bg-gray-400 md:flex dark:disabled:bg-gray-700"
+            className="mt-2 hidden w-full items-center justify-center bg-black py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:bg-gray-400 md:flex"
           >
             {isOutOfStock ? t("outOfStock") : t("add")}
           </button>

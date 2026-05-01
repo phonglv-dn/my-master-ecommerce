@@ -63,7 +63,7 @@ export default function ProductGallery({
       {/* Image + vertical thumb strip row (thumbs only show on lg+) */}
       <div className="flex w-full gap-4">
         {/* ── Main image (flush left) ── */}
-        <div className="group relative aspect-4/5 w-full flex-1 overflow-hidden bg-[#f0efeb] dark:bg-gray-800">
+        <div className="group relative aspect-4/5 w-full flex-1 overflow-hidden bg-[#f0efeb]">
           {activeImage && !imgError ? (
             <Image
               key={activeImage}

@@ -27,13 +27,13 @@ export default function CartClient() {
   if (items.length === 0) {
     return (
       <div className="mx-auto flex max-w-4xl flex-col items-center justify-center py-32 px-6 text-center">
-        <div className="mb-6 rounded-full bg-gray-100 p-6 dark:bg-gray-800">
-          <ShoppingBag size={48} className="text-gray-400 dark:text-gray-500" />
+        <div className="mb-6 rounded-full bg-gray-100 p-6">
+          <ShoppingBag size={48} className="text-gray-400" />
         </div>
-        <h1 className="mb-2 text-2xl font-bold text-gray-900 dark:text-white">
+        <h1 className="mb-2 text-2xl font-bold text-gray-900">
           {t("empty")}
         </h1>
-        <p className="mb-8 text-gray-500 dark:text-gray-400">
+        <p className="mb-8 text-gray-500">
           Có vẻ như bạn chưa thêm sản phẩm nào vào giỏ hàng.
         </p>
         <Link
@@ -60,14 +60,14 @@ export default function CartClient() {
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-12">
-      <h1 className="mb-8 text-3xl font-bold text-gray-900 dark:text-white">
+      <h1 className="mb-8 text-3xl font-bold text-gray-900">
         {tc("cart")}
       </h1>
 
       <div className="grid gap-12 lg:grid-cols-3">
         {/* Cart Items */}
         <div className="lg:col-span-2">
-          <ul className="divide-y divide-gray-200 dark:divide-gray-800 border-t border-gray-200 dark:border-gray-800">
+          <ul className="divide-y divide-gray-200 border-t border-gray-200">
             {items.map(({ product, quantity }) => {
               const localizedTitle = product.title[locale] ?? product.title.vi;
               const priceDisplay = formatPrice(product.price_vnd, currency, locale);
@@ -77,7 +77,7 @@ export default function CartClient() {
               return (
                 <li key={product.id} className="flex flex-col py-6 sm:flex-row sm:items-center gap-6">
                   {/* Image */}
-                  <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+                  <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100 border border-gray-200">
                     {coverImage ? (
                       <Image
                         src={coverImage}
@@ -96,38 +96,38 @@ export default function CartClient() {
                   {/* Info */}
                   <div className="flex flex-1 flex-col">
                     <div className="flex justify-between">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+                      <h3 className="text-lg font-medium text-gray-900">
                         <Link href={`/${locale}/products/${product.slug}`} className="hover:underline">
                           {localizedTitle}
                         </Link>
                       </h3>
-                      <p className="ml-4 font-semibold text-gray-900 dark:text-white">
+                      <p className="ml-4 font-semibold text-gray-900">
                         {itemTotal}
                       </p>
                     </div>
-                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    <p className="mt-1 text-sm text-gray-500">
                       {priceDisplay}
                     </p>
 
                     <div className="mt-4 flex items-center justify-between">
                       {/* Quantity */}
-                      <div className="flex h-9 items-center rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900">
+                      <div className="flex h-9 items-center rounded-md border border-gray-300 bg-white">
                         <button
                           type="button"
                           onClick={() => updateQuantity(product.id, quantity - 1)}
                           disabled={quantity <= 1}
-                          className="flex h-full w-9 items-center justify-center text-gray-500 transition hover:bg-gray-100 disabled:opacity-50 dark:hover:bg-gray-800"
+                          className="flex h-full w-9 items-center justify-center text-gray-500 transition hover:bg-gray-100 disabled:opacity-50"
                         >
                           <Minus size={14} />
                         </button>
-                        <span className="flex h-full w-10 items-center justify-center text-sm font-medium text-gray-900 dark:text-white">
+                        <span className="flex h-full w-10 items-center justify-center text-sm font-medium text-gray-900">
                           {quantity}
                         </span>
                         <button
                           type="button"
                           onClick={() => updateQuantity(product.id, quantity + 1)}
                           disabled={quantity >= product.stock}
-                          className="flex h-full w-9 items-center justify-center text-gray-500 transition hover:bg-gray-100 disabled:opacity-50 dark:hover:bg-gray-800"
+                          className="flex h-full w-9 items-center justify-center text-gray-500 transition hover:bg-gray-100 disabled:opacity-50"
                         >
                           <Plus size={14} />
                         </button>
@@ -152,24 +152,24 @@ export default function CartClient() {
 
         {/* Order Summary */}
         <div className="lg:col-span-1">
-          <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900 sticky top-24">
-            <h2 className="mb-4 text-lg font-bold text-gray-900 dark:text-white">
+          <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm sticky top-24">
+            <h2 className="mb-4 text-lg font-bold text-gray-900">
               Order Summary
             </h2>
 
             <div className="space-y-4">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-500 dark:text-gray-400">Subtotal</span>
-                <span className="font-medium text-gray-900 dark:text-white">{formattedTotal}</span>
+                <span className="text-gray-500">Subtotal</span>
+                <span className="font-medium text-gray-900">{formattedTotal}</span>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-500 dark:text-gray-400">Shipping</span>
-                <span className="font-medium text-gray-900 dark:text-white">Free</span>
+                <span className="text-gray-500">Shipping</span>
+                <span className="font-medium text-gray-900">Free</span>
               </div>
-              <hr className="border-gray-200 dark:border-gray-800" />
+              <hr className="border-gray-200" />
               <div className="flex items-center justify-between">
-                <span className="text-base font-bold text-gray-900 dark:text-white">{t("total")}</span>
-                <span className="text-xl font-extrabold text-primary-600 dark:text-primary-400">{formattedTotal}</span>
+                <span className="text-base font-bold text-gray-900">{t("total")}</span>
+                <span className="text-xl font-extrabold text-primary-600">{formattedTotal}</span>
               </div>
             </div>
 

@@ -36,7 +36,7 @@ export default async function ProductDetailPage({ params }: Props) {
   }
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-950">
+    <main className="min-h-screen bg-white">
       <ProductDetailClient product={product} />
     </main>
   );
