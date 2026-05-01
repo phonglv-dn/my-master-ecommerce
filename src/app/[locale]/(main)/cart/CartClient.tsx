@@ -254,13 +254,22 @@ export default function CartClient() {
               <span>{t("agreeTerms")}</span>
             </label>
 
-            <button
-              type="button"
-              disabled={!agreed}
-              className="w-full bg-black px-6 py-4 text-xs font-semibold uppercase tracking-[0.25em] text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/40"
-            >
-              {t("goToCheckout")}
-            </button>
+            {agreed ? (
+              <Link
+                href={`/${locale}/checkout`}
+                className="block w-full bg-black px-6 py-4 text-center text-xs font-semibold uppercase tracking-[0.25em] text-white transition hover:bg-black/85"
+              >
+                {t("goToCheckout")}
+              </Link>
+            ) : (
+              <button
+                type="button"
+                disabled
+                className="w-full cursor-not-allowed bg-black/40 px-6 py-4 text-xs font-semibold uppercase tracking-[0.25em] text-white"
+              >
+                {t("goToCheckout")}
+              </button>
+            )}
           </div>
         </aside>
       </div>

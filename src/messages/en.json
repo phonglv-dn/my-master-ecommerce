@@ -130,6 +130,39 @@
     "description": "The page you're looking for doesn't exist or has been moved.",
     "backToShop": "BACK TO SHOP"
   },
+  "checkout": {
+    "title": "CHECKOUT",
+    "back": "Back",
+    "stepInformation": "INFORMATION",
+    "stepShipping": "SHIPPING",
+    "stepPayment": "PAYMENT",
+    "contactInfo": "CONTACT INFO",
+    "shippingAddress": "SHIPPING ADDRESS",
+    "email": "Email",
+    "phone": "Phone",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "country": "Country",
+    "stateRegion": "State / Region",
+    "address": "Address",
+    "city": "City",
+    "postalCode": "Postal Code",
+    "submit": "PROCEED TO SHIPPING",
+    "yourOrder": "YOUR ORDER",
+    "change": "Change",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "shippingNote": "Calculated at next step",
+    "total": "Total",
+    "empty": "Your cart is empty.",
+    "browse": "Browse products",
+    "errors": {
+      "required": "This field is required",
+      "email": "Please enter a valid email",
+      "phone": "Please enter a valid phone number",
+      "min": "Must be at least {min} characters"
+    }
+  },
   "currency": {
     "VND": "₫",
     "USD": "$"

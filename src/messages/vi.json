@@ -130,6 +130,39 @@
     "description": "Trang bạn đang tìm không tồn tại hoặc đã được di chuyển.",
     "backToShop": "VỀ CỬA HÀNG"
   },
+  "checkout": {
+    "title": "THANH TOÁN",
+    "back": "Quay lại",
+    "stepInformation": "THÔNG TIN",
+    "stepShipping": "VẬN CHUYỂN",
+    "stepPayment": "THANH TOÁN",
+    "contactInfo": "THÔNG TIN LIÊN HỆ",
+    "shippingAddress": "ĐỊA CHỈ GIAO HÀNG",
+    "email": "Email",
+    "phone": "Số điện thoại",
+    "firstName": "Tên",
+    "lastName": "Họ",
+    "country": "Quốc gia",
+    "stateRegion": "Tỉnh / Thành phố",
+    "address": "Địa chỉ",
+    "city": "Quận / Huyện",
+    "postalCode": "Mã bưu chính",
+    "submit": "TIẾP TỤC GIAO HÀNG",
+    "yourOrder": "ĐƠN HÀNG CỦA BẠN",
+    "change": "Sửa",
+    "subtotal": "Tạm tính",
+    "shipping": "Vận chuyển",
+    "shippingNote": "Tính ở bước tiếp theo",
+    "total": "Tổng cộng",
+    "empty": "Giỏ hàng trống.",
+    "browse": "Xem sản phẩm",
+    "errors": {
+      "required": "Vui lòng nhập trường này",
+      "email": "Email không hợp lệ",
+      "phone": "Số điện thoại không hợp lệ",
+      "min": "Phải có ít nhất {min} ký tự"
+    }
+  },
   "currency": {
     "VND": "₫",
     "USD": "$"
