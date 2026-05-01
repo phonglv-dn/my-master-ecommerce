@@ -66,16 +66,10 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
           {/* Desktop Links */}
           <nav className='hidden md:flex items-center gap-8'>
             <Link
-              href='/collections'
+              href={`/${locale}/products`}
               className='text-[11px] font-medium uppercase tracking-[0.2em] text-black hover:opacity-60 transition-opacity'
             >
-              {th("collections")}
-            </Link>
-            <Link
-              href='/new'
-              className='text-[11px] font-medium uppercase tracking-[0.2em] text-black hover:opacity-60 transition-opacity'
-            >
-              {th("new")}
+              {th("shop")}
             </Link>
             <MinimalLocaleSwitch
               className='text-[11px] font-medium uppercase tracking-[0.2em] flex items-center gap-1.5'
@@ -266,18 +260,11 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
           >
             <div className='flex flex-col gap-5'>
               <Link
-                href='/collections'
+                href={`/${locale}/products`}
                 onClick={() => setIsMenuOpen(false)}
                 className='text-sm uppercase tracking-[0.25em] text-black/70 hover:text-black transition-colors w-fit'
               >
-                {th("collections")}
-              </Link>
-              <Link
-                href='/new'
-                onClick={() => setIsMenuOpen(false)}
-                className='text-sm uppercase tracking-[0.25em] text-black/70 hover:text-black transition-colors w-fit'
-              >
-                {th("new")}
+                {th("shop")}
               </Link>
               <Link
                 href={`/${locale}/wishlist`}
