@@ -46,6 +46,14 @@ export default async function AdminDashboardLayout({
             <span className="admin-sidebar__link-icon">➕</span>
             Thêm sản phẩm
           </Link>
+          <Link
+            href="/admin/brand"
+            className="admin-sidebar__link"
+            id="nav-brand"
+          >
+            <span className="admin-sidebar__link-icon">🎨</span>
+            Thương hiệu
+          </Link>
         </nav>
 
         <div className="admin-sidebar__footer">

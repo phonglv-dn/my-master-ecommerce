@@ -1,7 +1,6 @@
 export const SHOP_CONFIG = {
   brand: {
     name: "SBLVK",
-    logoUrl: "/images/logo.svg",
   },
 
   theme: {

@@ -8,6 +8,12 @@
 
   --background: #f8f8f8;
   --foreground: #000000;
+
+  /* Brand palette — single source for the hard-coded colors that used to
+     be sprinkled across HeaderV3, page backgrounds, and components. */
+  --brand-ink:    #1a1a1a; /* near-black UI ink (header buttons, scrollbar hover) */
+  --brand-paper:  #f9f9f9; /* off-white page surface (overlays, cards) */
+  --brand-mute:   #d1d5db; /* desaturated accent (logo secondary, dividers) */
 }
 
 /* ── Base ───────────────────────────────────────────────────────────── */

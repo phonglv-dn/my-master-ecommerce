@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect, useMemo } from "react"
+import React, { useState, useEffect, useMemo, type ReactNode } from "react"
 import Link from "next/link"
 import { Heart, ShoppingBag, User, Search } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
@@ -11,9 +11,12 @@ import { buildCategoryTree } from "../../../../utils/categoryUtils"
 
 interface HeaderV3Props {
   categories?: Category[]
+  /** Server-resolved <BrandMark/> — passed in by the parent so HeaderV3 stays
+   *  a client component but the logo source still comes from the brand CMS. */
+  logoSlot?: ReactNode
 }
 
-export default function HeaderV3({ categories = [] }: HeaderV3Props) {
+export default function HeaderV3({ categories = [], logoSlot }: HeaderV3Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const locale = useLocale() as "vi" | "en"
   const tc = useTranslations("common")
@@ -80,25 +83,16 @@ export default function HeaderV3({ categories = [] }: HeaderV3Props) {
           </nav>
         </div>
 
-        {/* Center: Geometric Logo (Absolute Centered) */}
+        {/* Center: Brand mark (resolved server-side from brand_assets CMS, with
+            static-default fallback). */}
         <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center z-[60]'>
           <Link
             href='/'
             aria-label={tc("home")}
-            className='group inline-flex items-center justify-center p-3 -m-3 rounded-full hover:bg-black/5 transition-colors'
+            className='inline-flex items-center justify-center'
             onClick={() => setIsMenuOpen(false)}
           >
-            <svg
-              width='28'
-              height='28'
-              viewBox='0 0 32 32'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-              className='transform transition-transform duration-500 group-hover:rotate-180'
-            >
-              <path d='M16 0L32 16L16 32V0Z' fill='#1A1A1A' />
-              <path d='M16 0L0 16L16 32V0Z' fill='#D1D5DB' />
-            </svg>
+            {logoSlot}
           </Link>
         </div>
 
